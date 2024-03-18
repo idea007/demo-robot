@@ -128,6 +128,8 @@ open class DrawInfo {
         this.paintSytle = paintSytle
         this.paintCap = paintCap
     }
+
+
 }
 
 
@@ -221,7 +223,7 @@ open class ViewPropertyInfo {
 /**
  * 协调 CurveShapeView 的位置和绘制等
  */
-open class CSVVisualInfo {
+open class VisualInfo {
     var drawInfo = DrawInfo()
     var viewPropertyInfo = ViewPropertyInfo()
 
@@ -239,12 +241,12 @@ open class EmoteInfo {
     var interpolatorType: Int = 8
     var isDelay: Boolean = false
 
-    var faceVisualInfo = CSVVisualInfo(DrawInfoConst.DEFAULT_DRAWINFO_FACE, ViewPropertyInfoConst.DEFAULT_RENDERINFO_FACE)
-    var leftEyeVisualInfo = CSVVisualInfo(DrawInfoConst.DEFAULT_DRAWINFO_ORBIT, ViewPropertyInfoConst.DEFAULT_RENDERINFO_LEFT_ORBIT)
-    var leftCheekVisualInfo = CSVVisualInfo(DrawInfoConst.DEFAULT_DRAWINFO_ORBIT, ViewPropertyInfoConst.DEFAULT_RENDERINFO_LEFT_ORBIT)
-    var rightEyeVisualInfo = CSVVisualInfo(DrawInfoConst.DEFAULT_DRAWINFO_FACE, ViewPropertyInfoConst.DEFAULT_RENDERINFO_RIGHT_ORBIT)
-    var rightCheekVisualInfo = CSVVisualInfo(DrawInfoConst.DEFAULT_DRAWINFO_FACE, ViewPropertyInfoConst.DEFAULT_RENDERINFO_RIGHT_ORBIT)
-    var mouseVisualInfo = CSVVisualInfo(DrawInfoConst.DEFAULT_DRAWINFO_ORBIT, ViewPropertyInfoConst.DEFAULT_RENDERINFO_DOWN_ORBIT)
+    var faceVisualInfo = VisualInfo(DrawInfoConst.DEFAULT_DRAWINFO_FACE, ViewPropertyInfoConst.DEFAULT_RENDERINFO_FACE)
+    var leftEyeVisualInfo = VisualInfo(DrawInfoConst.DEFAULT_DRAWINFO_ORBIT, ViewPropertyInfoConst.DEFAULT_RENDERINFO_LEFT_ORBIT)
+    var leftCheekVisualInfo = VisualInfo(DrawInfoConst.DEFAULT_DRAWINFO_ORBIT, ViewPropertyInfoConst.DEFAULT_RENDERINFO_LEFT_ORBIT)
+    var rightEyeVisualInfo = VisualInfo(DrawInfoConst.DEFAULT_DRAWINFO_FACE, ViewPropertyInfoConst.DEFAULT_RENDERINFO_RIGHT_ORBIT)
+    var rightCheekVisualInfo = VisualInfo(DrawInfoConst.DEFAULT_DRAWINFO_FACE, ViewPropertyInfoConst.DEFAULT_RENDERINFO_RIGHT_ORBIT)
+    var mouseVisualInfo = VisualInfo(DrawInfoConst.DEFAULT_DRAWINFO_ORBIT, ViewPropertyInfoConst.DEFAULT_RENDERINFO_DOWN_ORBIT)
 
 }
 

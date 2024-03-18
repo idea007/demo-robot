@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dafay.demo.lib.base.ui.adapter.BaseAdapter
 import com.dafay.demo.robot.data.Constants
 import com.dafay.demo.robot.data.DrawInfo
+import com.dafay.demo.robot.data.ViewPropertyInfo
+import com.dafay.demo.robot.data.VisualInfo
 import com.dafay.demo.robot.databinding.ItemCurveshapeBinding
 
 /**
@@ -136,10 +138,10 @@ class CurveShapeAdapter : BaseAdapter<String>() {
                     drawInfo4.apply {
                         radiusRatio=progress.toFloat() / 100
                     }
-                    binding.csvShapeview1.changeEndCurveShape(drawInfo1,true)
-                    binding.csvShapeview2.changeEndCurveShape(drawInfo2,true)
-                    binding.csvShapeview3.changeEndCurveShape(drawInfo3,true)
-                    binding.csvShapeview4.changeEndCurveShape(drawInfo4,true)
+                    binding.csvShapeview1.changeVisualInfo(VisualInfo( drawInfo1, ViewPropertyInfo()),true)
+                    binding.csvShapeview2.changeVisualInfo(VisualInfo( drawInfo2, ViewPropertyInfo()),true)
+                    binding.csvShapeview3.changeVisualInfo(VisualInfo( drawInfo3, ViewPropertyInfo()),true)
+                    binding.csvShapeview4.changeVisualInfo(VisualInfo( drawInfo4, ViewPropertyInfo()),true)
                 }
 
                 override fun onStartTrackingTouch(seekBar: SeekBar?) {
@@ -149,18 +151,18 @@ class CurveShapeAdapter : BaseAdapter<String>() {
                 }
             })
             binding.root.post {
-                binding.csvShapeview1.changeCurveShape(
-                    drawInfo1, true
+                binding.csvShapeview1.changeVisualInfo(
+                    VisualInfo( drawInfo1, ViewPropertyInfo()), true
                 )
 
-                binding.csvShapeview2.changeCurveShape(
-                    drawInfo2, true
+                binding.csvShapeview2.changeVisualInfo(
+                    VisualInfo( drawInfo2, ViewPropertyInfo()), true
                 )
-                binding.csvShapeview3.changeCurveShape(
-                    drawInfo3, true
+                binding.csvShapeview3.changeVisualInfo(
+                    VisualInfo( drawInfo3, ViewPropertyInfo()), true
                 )
-                binding.csvShapeview4.changeCurveShape(
-                    drawInfo4, true
+                binding.csvShapeview4.changeVisualInfo(
+                    VisualInfo( drawInfo4, ViewPropertyInfo()), true
                 )
                 binding.sbSeekbar1.progress = 100
                 binding.sbSeekbar2.progress = 20

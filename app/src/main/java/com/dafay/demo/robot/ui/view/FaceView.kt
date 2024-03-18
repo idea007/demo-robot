@@ -43,16 +43,18 @@ class FaceView @kotlin.jvm.JvmOverloads constructor(
     }
 
 
-    fun changeEmote(emoteInfo: EmoteInfo) {
+    fun changeEmote(emoteInfo: EmoteInfo, isInvalidate: Boolean = true, progress: Float? = null) {
         // 获取当前状态的 EmoteInfo
         var tempEmoteInfo = EmoteInfo()
         tempEmoteInfo.faceVisualInfo = binding.cvFaceOrbit.getCurrentVisualInfo()
         startEmoteInfo = tempEmoteInfo
         endEmoteInfo = emoteInfo
-
-        binding.cvFaceOrbit.changeCurveShape(emoteInfo.faceVisualInfo.drawInfo)
-
-
+        binding.cvFaceOrbit.changeVisualInfo(emoteInfo.faceVisualInfo,true,1f)
+        binding.cvLeftCheekOrbit.changeVisualInfo(emoteInfo.leftCheekVisualInfo,true,1f)
+        binding.cvLeftEyeOrbit.changeVisualInfo(emoteInfo.leftEyeVisualInfo,true,1f)
+        binding.cvRightCheekOrbit.changeVisualInfo(emoteInfo.rightCheekVisualInfo,true,1f)
+        binding.cvRightEyeOrbit.changeVisualInfo(emoteInfo.rightEyeVisualInfo,true,1f)
+        binding.cvMouseOrbit.changeVisualInfo(emoteInfo.mouseVisualInfo,true,1f)
     }
 
 

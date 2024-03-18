@@ -1,6 +1,7 @@
 package com.dafay.demo.robot.ui.page.emote
 
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.dafay.demo.lib.base.ui.base.BaseFragment
 import com.dafay.demo.robot.R
@@ -15,7 +16,8 @@ class EmotesPreviewFragment : BaseFragment(R.layout.fragment_emotes_preview) {
     override val binding: FragmentEmotesPreviewBinding by viewBinding()
     private lateinit var emoteAdapter: EmoteAdapter
     private val emotes = ArrayList<EmoteInfo>().apply {
-        add(OliveFace.getShapeOne())
+        add(OliveFace.getEmoteOne())
+        add(OliveFace.getEmote2())
     }
 
     override fun initViews() {
@@ -25,7 +27,9 @@ class EmotesPreviewFragment : BaseFragment(R.layout.fragment_emotes_preview) {
     private fun initRecyclerView() {
         emoteAdapter = EmoteAdapter()
         binding.rvRecyclerview.apply {
-            this.layoutManager = LinearLayoutManager(requireContext())
+            val linearLayoutManager = LinearLayoutManager(requireContext())
+            linearLayoutManager.orientation = RecyclerView.HORIZONTAL
+            this.layoutManager = linearLayoutManager
             this.adapter = emoteAdapter
         }
     }

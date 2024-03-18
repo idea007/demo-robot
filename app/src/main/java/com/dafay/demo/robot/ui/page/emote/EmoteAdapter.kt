@@ -33,7 +33,9 @@ class EmoteAdapter : BaseAdapter<EmoteInfo>() {
         }
 
         fun onBindViewHolder(position: Int, emoteInfo: EmoteInfo) {
-          binding.fvFace.changeEmote(emoteInfo)
+            binding.fvFace.post {
+                binding.fvFace.changeEmote(emoteInfo)
+            }
         }
     }
 }
