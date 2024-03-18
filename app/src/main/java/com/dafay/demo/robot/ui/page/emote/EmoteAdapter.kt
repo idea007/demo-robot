@@ -1,17 +1,10 @@
 package com.dafay.demo.robot.ui.page.emote
 
-import android.graphics.Color
-import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.SeekBar
-import android.widget.SeekBar.OnSeekBarChangeListener
 import androidx.recyclerview.widget.RecyclerView
 import com.dafay.demo.lib.base.ui.adapter.BaseAdapter
-import com.dafay.demo.robot.data.Constants
-import com.dafay.demo.robot.data.DrawAndAnimInfoGroup
-import com.dafay.demo.robot.data.DrawInfo
-import com.dafay.demo.robot.databinding.ItemCurveshapeBinding
+import com.dafay.demo.robot.data.EmoteInfo
 import com.dafay.demo.robot.databinding.ItemEmoteBinding
 
 /**
@@ -20,7 +13,7 @@ import com.dafay.demo.robot.databinding.ItemEmoteBinding
  * @Author lipengfei
  * @Date 2023/11/24 17:37
  */
-class EmoteAdapter : BaseAdapter<DrawAndAnimInfoGroup>() {
+class EmoteAdapter : BaseAdapter<EmoteInfo>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return EmoteHolder(ItemEmoteBinding.inflate(LayoutInflater.from(parent.context)))
     }
@@ -39,8 +32,8 @@ class EmoteAdapter : BaseAdapter<DrawAndAnimInfoGroup>() {
             binding = itemView
         }
 
-        fun onBindViewHolder(position: Int, drawAndAnimInfoGroup: DrawAndAnimInfoGroup) {
-          binding.fvFace.changeEmote(drawAndAnimInfoGroup)
+        fun onBindViewHolder(position: Int, emoteInfo: EmoteInfo) {
+          binding.fvFace.changeEmote(emoteInfo)
         }
     }
 }

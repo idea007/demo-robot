@@ -9,9 +9,11 @@ import android.graphics.Path
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
+import com.dafay.demo.robot.data.CSVVisualInfo
 import com.dafay.demo.robot.data.CurveShape
 import com.dafay.demo.robot.data.CurveShapeFactory
 import com.dafay.demo.robot.data.DrawInfo
+import com.dafay.demo.robot.data.ViewPropertyInfo
 import com.dafay.demo.robot.data.getCurrentCurveShape
 import com.dafay.demo.robot.data.getCurveShapePaths
 import java.util.*
@@ -37,7 +39,6 @@ public class CurveShapeView @kotlin.jvm.JvmOverloads constructor(
     private var centerX = 0f
 
 
-
     // 画笔
     private val paint: Paint by lazy { Paint(Paint.ANTI_ALIAS_FLAG) }        //画笔
 
@@ -60,6 +61,7 @@ public class CurveShapeView @kotlin.jvm.JvmOverloads constructor(
     var paths = ArrayList<Path>()
 
     private var initCurveShapeType: String = CurveShapeFactory.形状_圆形
+    private var drawInfo: DrawInfo? = null
 
     init {
         initPaint()
@@ -167,8 +169,9 @@ public class CurveShapeView @kotlin.jvm.JvmOverloads constructor(
     private var isHaveCompute = false
 
     fun changeEndCurveShape(orderInfo: DrawInfo, isInvalidate: Boolean = false) {
+        this.drawInfo = orderInfo
         endCurveShape = CurveShapeFactory.getCurveGroupByType(
-            orderInfo.animType,
+            orderInfo.shapeType,
             orderInfo.isLink,
             orderInfo.radiusRatio,
             centerX,
@@ -181,7 +184,7 @@ public class CurveShapeView @kotlin.jvm.JvmOverloads constructor(
 
     fun changeCurveShape(orderInfo: DrawInfo, isInvalidate: Boolean = false) {
         Log.w(TAG, "---- changeCurveGroup")
-
+        this.drawInfo = orderInfo
         if (!orderInfo.isDelay) {
             isNedeChange = true
             isHaveCompute = false
@@ -193,7 +196,7 @@ public class CurveShapeView @kotlin.jvm.JvmOverloads constructor(
             }
 
             endCurveShape = CurveShapeFactory.getCurveGroupByType(
-                orderInfo.animType,
+                orderInfo.shapeType,
                 orderInfo.isLink,
                 orderInfo.radiusRatio,
                 centerX,
@@ -261,6 +264,32 @@ public class CurveShapeView @kotlin.jvm.JvmOverloads constructor(
 
         paint.style = orderInfo.paintSytle
         paint.strokeCap = orderInfo.paintCap
+    }
+
+    fun getCurrentVisualInfo(): CSVVisualInfo {
+        var viewPropertyInfo = getCurrentViewPropertyInfo()
+        var drawInfo: DrawInfo = getCurrentDrawInfo()
+        val visualInfo = CSVVisualInfo(drawInfo, viewPropertyInfo);
+        return visualInfo
+    }
+
+    private fun getCurrentViewPropertyInfo(): ViewPropertyInfo {
+        var viewPropertyInfo = ViewPropertyInfo()
+        viewPropertyInfo.translationXRatio = this.translationX / this.centerX
+        viewPropertyInfo.translationYRatio = this.translationY / this.centerX
+        viewPropertyInfo.scaleX = this.scaleX
+        viewPropertyInfo.scaleY = this.scaleY
+        viewPropertyInfo.alpha = this.alpha
+        viewPropertyInfo.rotation = this.rotation
+        viewPropertyInfo.rotationX = this.rotationX
+        viewPropertyInfo.rotationY = this.rotationY
+        return viewPropertyInfo
+    }
+
+
+
+    private fun getCurrentDrawInfo(): DrawInfo {
+        return drawInfo?:DrawInfo()
     }
 
 

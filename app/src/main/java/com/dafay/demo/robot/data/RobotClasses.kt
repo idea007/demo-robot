@@ -5,7 +5,7 @@ import android.graphics.PointF
 import java.util.ArrayList
 
 /**
- * 一段三阶贝塞尔曲线
+ * 定义一段三阶贝塞尔曲线
  */
 open class Curve {
     // 锚点一
@@ -37,7 +37,7 @@ open class Curve {
 }
 
 /**
- * 贝塞尔曲线集合，有四段贝塞尔曲线组成一个形状
+ * 四段贝塞尔曲线组成一个形状
  */
 open class CurveShape {
 
@@ -46,7 +46,7 @@ open class CurveShape {
     var centerX = 0f
     var centerY = 0f
 
-    //半径 做为一个基础值
+    //半径 做为一个基础值，所有的计算都基于这个值
     var radius = 0f
 
     //存储四段贝塞尔曲线
@@ -79,10 +79,8 @@ open class CurveShape {
 }
 
 
-/** 指令详情 用了控制一个 curve 的动画
- * 主要控制 curveview 内部 onDraw
- * @param animType 形状类型
- * @param duration 动画时长
+/** 控制一个 CurveShapeView 的绘制形状 作用于 onDraw
+ * @param shapeType 形状类型
  * @interpolatorType 加速类型
  * @isDelay 是否是延迟     true 就是不执行动画
  * @radiusRatio radius 比例 ，用了改变形状大小 因为中心点就是view的中心，大小由radius控制
@@ -91,11 +89,8 @@ open class CurveShape {
  * @centerYRatio 这里通过比例来确定相对于中心点的位置
  */
 open class DrawInfo {
-    var animType: String = CurveShapeFactory.形状_圆形
+    var shapeType: String = CurveShapeFactory.形状_圆形
     var isLink: Boolean = true
-    var duration: Long = Constants.DEFAULT_DURATION
-    var interpolatorType: Int = 8
-    var isDelay: Boolean = false
     var radiusRatio: Float = 0.75f
     var targetColor: Int = Constants.TRANSPARENT_COLOR
     var centerXRatio: Float = 1f
@@ -103,6 +98,11 @@ open class DrawInfo {
     var paintStrokeWidthRatio: Float = 0f
     var paintSytle: Paint.Style = Paint.Style.FILL_AND_STROKE
     var paintCap: Paint.Cap = Paint.Cap.ROUND
+
+    var duration: Long = Constants.DEFAULT_DURATION
+    var interpolatorType: Int = 8
+    var isDelay: Boolean = false
+
     constructor(
         radiusRatio: Float = 0.75f,
         targetColor: Int = Constants.TRANSPARENT_COLOR,
@@ -117,7 +117,7 @@ open class DrawInfo {
     ) {
         this.radiusRatio = radiusRatio
         this.targetColor = targetColor
-        this.animType = animType
+        this.shapeType = animType
         this.isLink = isLink
         this.duration = duration
         this.interpolatorType = interpolatorType
@@ -130,50 +130,26 @@ open class DrawInfo {
     }
 }
 
-/**
- * 主要用于 控制 draw 形状等
- */
-open class DrawInfoGroup() {
-
-    constructor(
-        isDelay: Boolean = false,
-        duration: Long = Constants.DEFAULT_DURATION,
-        interpolatorType: Int = 8
-
-    ) : this() {
-        this.duration = duration
-        this.interpolatorType = interpolatorType
-        this.isDelay = isDelay
-    }
-
-    // 头部形状
-    var firstHeadOrderInfo = Constants.DEFAULT_DRAWINFO_HEAD
-
-    // 左眼
-    var firstLeftEyeOrderInfo = Constants.DEFAULT_DRAWINFO_ORBIT
-    var secondLeftEyeOrderInfo = Constants.DEFAULT_DRAWINFO_ORBIT
-
-    // 右眼
-    var firstRightEyeOrderInfo = Constants.DEFAULT_DRAWINFO_ORBIT
-    var secondRightEyeOrderInfo = Constants.DEFAULT_DRAWINFO_ORBIT
-
-    // 嘴
-    var firstMouseOrderInfo = Constants.DEFAULT_DRAWINFO_ORBIT
-
-    // 底部托盘
-    var trayOrderInfo = Constants.DEFAULT_DRAWINFO_TRAY
-
-
-    var duration: Long = Constants.DEFAULT_DURATION
-    var interpolatorType: Int = 8
-    var isDelay: Boolean = false
-
-}
 
 /**
- * 主要用于 控制 transition,scale,rotation 等信息
+ * 主要 VurveShapeView 属性  transition ,scale,alpha,rotate
  */
-open class ObjectAnimInfoGroup() {
+open class ViewPropertyInfo {
+
+    var translationXRatio: Float = 0f
+    var translationYRatio: Float = 0f
+    var scaleX: Float = 1f
+    var scaleY: Float = 1f
+    var alpha: Float = 1f
+    var rotation: Float = 0f
+    var rotationX: Float = 0f
+    var rotationY: Float = 0f
+
+    // 是否需要变换
+    var isNedeChange = true
+
+    // 是否比较过
+    var isHaveCompute = false
 
     var duration: Long = Constants.DEFAULT_DURATION
     var interpolatorType: Int = 8
@@ -184,34 +160,176 @@ open class ObjectAnimInfoGroup() {
         duration: Long = Constants.DEFAULT_DURATION,
         interpolatorType: Int = 8
 
-    ) : this() {
+    ) {
+        this.duration = duration
+        this.interpolatorType = interpolatorType
+        this.isDelay = isDelay
+    }
+
+    constructor(
+        translationXRatio: Float = 0f,
+        translationYRatio: Float = 0f,
+        scaleX: Float = 1f,
+        scaleY: Float = 1f,
+        alpha: Float = 1f,
+        rotation: Float = 0f,
+        rotationX: Float = 0f,
+        rotationY: Float = 0f,
+
+        duration: Long = Constants.DEFAULT_DURATION,
+        interpolatorType: Int = 8,
+        isDelay: Boolean = false
+    ) {
+        this.translationXRatio = translationXRatio
+        this.translationYRatio = translationYRatio
+        this.scaleX = scaleX
+        this.scaleY = scaleY
+        this.alpha = alpha
+        this.rotation = rotation
+        this.rotationX = rotationX
+        this.rotationY = rotationY
+
         this.duration = duration
         this.interpolatorType = interpolatorType
         this.isDelay = isDelay
     }
 
 
-    // 头部形状
-    var firstHeadRenderInfo = Constants.DEFAULT_RENDERINFO_HEAD
+    override fun equals(other: Any?): Boolean {
 
-    // 左眼
-    var firstLeftEyeRenderInfo = Constants.DEFAULT_RENDERINFO_LEFT_ORBIT
-    var secondLeftEyeRenderInfo = Constants.DEFAULT_RENDERINFO_LEFT_ORBIT
+        if (this == null && other == null) {
+            return true
+        }
 
-    // 右眼
-    var firstRightEyeRenderInfo = Constants.DEFAULT_RENDERINFO_RIGHT_ORBIT
-    var secondRightEyeRenderInfo = Constants.DEFAULT_RENDERINFO_RIGHT_ORBIT
+        other ?: return false
 
-    // 嘴
-    var firstMouseRenderInfo = Constants.DEFAULT_RENDERINFO_DOWN_ORBIT
+        if (other is ViewPropertyInfo) {
+            return this.translationXRatio == other.translationXRatio &&
+                    this.translationYRatio == other.translationYRatio &&
+                    this.scaleX == other.scaleX &&
+                    this.scaleY == other.scaleY &&
+                    this.alpha == other.alpha &&
+                    this.rotation == other.rotation &&
+                    this.rotationX == other.rotationX &&
+                    this.rotationY == other.rotationY
+        } else {
+            return false
+        }
+    }
+}
 
-    // 底部托盘
-    var trayRenderInfo = Constants.DEFAULT_RENDERINFO_TRAY
+/**
+ * 协调 CurveShapeView 的位置和绘制等
+ */
+open class CSVVisualInfo {
+    var drawInfo = DrawInfo()
+    var viewPropertyInfo = ViewPropertyInfo()
 
+    constructor(drawInfo: DrawInfo, viewPropertyInfo: ViewPropertyInfo) {
+        this.drawInfo = drawInfo
+        this.viewPropertyInfo = viewPropertyInfo
+    }
+}
+
+/**
+ * 表情信息
+ */
+open class EmoteInfo {
+    var duration: Long = Constants.DEFAULT_DURATION
+    var interpolatorType: Int = 8
+    var isDelay: Boolean = false
+
+    var faceVisualInfo = CSVVisualInfo(DrawInfoConst.DEFAULT_DRAWINFO_FACE, ViewPropertyInfoConst.DEFAULT_RENDERINFO_FACE)
+    var leftEyeVisualInfo = CSVVisualInfo(DrawInfoConst.DEFAULT_DRAWINFO_ORBIT, ViewPropertyInfoConst.DEFAULT_RENDERINFO_LEFT_ORBIT)
+    var leftCheekVisualInfo = CSVVisualInfo(DrawInfoConst.DEFAULT_DRAWINFO_ORBIT, ViewPropertyInfoConst.DEFAULT_RENDERINFO_LEFT_ORBIT)
+    var rightEyeVisualInfo = CSVVisualInfo(DrawInfoConst.DEFAULT_DRAWINFO_FACE, ViewPropertyInfoConst.DEFAULT_RENDERINFO_RIGHT_ORBIT)
+    var rightCheekVisualInfo = CSVVisualInfo(DrawInfoConst.DEFAULT_DRAWINFO_FACE, ViewPropertyInfoConst.DEFAULT_RENDERINFO_RIGHT_ORBIT)
+    var mouseVisualInfo = CSVVisualInfo(DrawInfoConst.DEFAULT_DRAWINFO_ORBIT, ViewPropertyInfoConst.DEFAULT_RENDERINFO_DOWN_ORBIT)
 
 }
 
-open class DrawAndAnimInfoGroup() {
-    var renderInfoGroup = ObjectAnimInfoGroup()
-    var orderInfoGroup = DrawInfoGroup()
-}
+///**
+// * 主要用于 控制 draw 形状等
+// */
+//open class DrawInfoGroup() {
+//
+//    constructor(
+//        isDelay: Boolean = false,
+//        duration: Long = Constants.DEFAULT_DURATION,
+//        interpolatorType: Int = 8
+//
+//    ) : this() {
+//        this.duration = duration
+//        this.interpolatorType = interpolatorType
+//        this.isDelay = isDelay
+//    }
+//
+//    // 头部形状
+//    var firstHeadOrderInfo = DrawInfoConst.DEFAULT_DRAWINFO_FACE
+//
+//    // 左眼
+//    var firstLeftEyeOrderInfo = DrawInfoConst.DEFAULT_DRAWINFO_ORBIT
+//    var secondLeftEyeOrderInfo = DrawInfoConst.DEFAULT_DRAWINFO_ORBIT
+//
+//    // 右眼
+//    var firstRightEyeOrderInfo = DrawInfoConst.DEFAULT_DRAWINFO_ORBIT
+//    var secondRightEyeOrderInfo = DrawInfoConst.DEFAULT_DRAWINFO_ORBIT
+//
+//    // 嘴
+//    var firstMouseOrderInfo = DrawInfoConst.DEFAULT_DRAWINFO_ORBIT
+//
+//    // 底部托盘
+//    var trayOrderInfo = DrawInfoConst.DEFAULT_DRAWINFO_TRAY
+//
+//
+//    var duration: Long = Constants.DEFAULT_DURATION
+//    var interpolatorType: Int = 8
+//    var isDelay: Boolean = false
+//
+//}
+//
+///**
+// * 主要用于 控制 transition,scale,rotation 等信息
+// */
+//open class ObjectAnimInfoGroup() {
+//
+//    var duration: Long = Constants.DEFAULT_DURATION
+//    var interpolatorType: Int = 8
+//    var isDelay: Boolean = false
+//
+//    constructor(
+//        isDelay: Boolean = false,
+//        duration: Long = Constants.DEFAULT_DURATION,
+//        interpolatorType: Int = 8
+//
+//    ) : this() {
+//        this.duration = duration
+//        this.interpolatorType = interpolatorType
+//        this.isDelay = isDelay
+//    }
+//
+//
+//    // 头部形状
+//    var firstHeadRenderInfo = Constants.DEFAULT_RENDERINFO_HEAD
+//
+//    // 左眼
+//    var firstLeftEyeRenderInfo = Constants.DEFAULT_RENDERINFO_LEFT_ORBIT
+//    var secondLeftEyeRenderInfo = Constants.DEFAULT_RENDERINFO_LEFT_ORBIT
+//
+//    // 右眼
+//    var firstRightEyeRenderInfo = Constants.DEFAULT_RENDERINFO_RIGHT_ORBIT
+//    var secondRightEyeRenderInfo = Constants.DEFAULT_RENDERINFO_RIGHT_ORBIT
+//
+//    // 嘴
+//    var firstMouseRenderInfo = Constants.DEFAULT_RENDERINFO_DOWN_ORBIT
+//
+//    // 底部托盘
+//    var trayRenderInfo = Constants.DEFAULT_RENDERINFO_TRAY
+//
+//
+//}
+//
+//open class DrawAndAnimInfoGroup() {
+//    var renderInfoGroup = ObjectAnimInfoGroup()
+//    var orderInfoGroup = DrawInfoGroup()
+//}

@@ -17,31 +17,31 @@
 
 
         <com.dafay.demo.robot.ui.view.CurveShapeView
-            android:id="@+id/cv_left_eye_orbit2"
+            android:id="@+id/cv_left_eye_orbit"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
 
         <com.dafay.demo.robot.ui.view.CurveShapeView
-            android:id="@+id/cv_left_eye_orbit1"
+            android:id="@+id/cv_left_cheek_orbit"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
 
         <com.dafay.demo.robot.ui.view.CurveShapeView
-            android:id="@+id/cv_right_eye_orbit2"
+            android:id="@+id/cv_right_eye_orbit"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
 
         <com.dafay.demo.robot.ui.view.CurveShapeView
-            android:id="@+id/cv_right_eye_orbit1"
+            android:id="@+id/cv_right_cheek_orbit"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
 
         <com.dafay.demo.robot.ui.view.CurveShapeView
-            android:id="@+id/cv_mouse_orbit1"
+            android:id="@+id/cv_mouse_orbit"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
