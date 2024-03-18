@@ -1,4 +1,4 @@
-package com.dafay.demo.robot
+package com.dafay.demo.robot.ui.page.home
 
 import android.view.LayoutInflater
 import android.view.View

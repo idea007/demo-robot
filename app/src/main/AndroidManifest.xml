@@ -13,9 +13,9 @@
         android:theme="@style/Theme.Demorobot"
         tools:targetApi="31">
 
-        <activity android:name=".HostActivity"/>
+        <activity android:name=".ui.page.HostActivity"/>
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.page.home.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

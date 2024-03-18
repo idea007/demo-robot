@@ -28,7 +28,7 @@
                 android:layout_marginLeft="4dp"
                 android:orientation="vertical">
 
-                <com.dafay.demo.robot.CurveShapeView
+                <com.dafay.demo.robot.ui.view.CurveShapeView
                     android:id="@+id/csv_shapeview1"
                     android:layout_width="90dp"
                     android:layout_height="90dp"
@@ -49,7 +49,7 @@
                 android:layout_marginLeft="4dp"
                 android:orientation="vertical">
 
-                <com.dafay.demo.robot.CurveShapeView
+                <com.dafay.demo.robot.ui.view.CurveShapeView
                     android:id="@+id/csv_shapeview2"
                     android:layout_width="90dp"
                     android:layout_height="90dp"
@@ -70,7 +70,7 @@
                 android:layout_marginLeft="4dp"
                 android:orientation="vertical">
 
-                <com.dafay.demo.robot.CurveShapeView
+                <com.dafay.demo.robot.ui.view.CurveShapeView
                     android:id="@+id/csv_shapeview3"
                     android:layout_width="90dp"
                     android:layout_height="90dp"
@@ -91,7 +91,7 @@
                 android:layout_marginLeft="4dp"
                 android:orientation="vertical">
 
-                <com.dafay.demo.robot.CurveShapeView
+                <com.dafay.demo.robot.ui.view.CurveShapeView
                     android:id="@+id/csv_shapeview4"
                     android:layout_width="90dp"
                     android:layout_height="90dp"

@@ -1,14 +1,9 @@
-package com.dafay.demo.robot
+package com.dafay.demo.robot.ui.page.preview
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.viewbinding.ViewBinding
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.dafay.demo.lib.base.ui.base.BaseFragment
+import com.dafay.demo.robot.R
 import com.dafay.demo.robot.data.CurveShapeFactory
 import com.dafay.demo.robot.databinding.FragmentCurveShapesPreviewBinding
 

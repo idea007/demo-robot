@@ -91,7 +91,18 @@ open class CurveShape {
  * @centerYRatio 这里通过比例来确定相对于中心点的位置
  */
 open class DrawInfo {
-
+    var animType: String = CurveShapeFactory.形状_圆形
+    var isLink: Boolean = true
+    var duration: Long = Constants.DEFAULT_DURATION
+    var interpolatorType: Int = 8
+    var isDelay: Boolean = false
+    var radiusRatio: Float = 0.75f
+    var targetColor: Int = Constants.TRANSPARENT_COLOR
+    var centerXRatio: Float = 1f
+    var centerYRatio: Float = 1f
+    var paintStrokeWidthRatio: Float = 0f
+    var paintSytle: Paint.Style = Paint.Style.FILL_AND_STROKE
+    var paintCap: Paint.Cap = Paint.Cap.ROUND
     constructor(
         radiusRatio: Float = 0.75f,
         targetColor: Int = Constants.TRANSPARENT_COLOR,
@@ -100,7 +111,8 @@ open class DrawInfo {
         duration: Long = Constants.DEFAULT_DURATION,
         interpolatorType: Int = 8, isDelay: Boolean = false,
         centerXRatio: Float = 1f, centerYRatio: Float = 1f,
-        paintStrokeWidthRatio: Float = 0f, paintSytle: Paint.Style = Paint.Style.FILL_AND_STROKE,
+        paintStrokeWidthRatio: Float = 0f,
+        paintSytle: Paint.Style = Paint.Style.FILL_AND_STROKE,
         paintCap: Paint.Cap = Paint.Cap.ROUND
     ) {
         this.radiusRatio = radiusRatio
@@ -116,17 +128,90 @@ open class DrawInfo {
         this.paintSytle = paintSytle
         this.paintCap = paintCap
     }
+}
 
-    var animType: String = CurveShapeFactory.形状_圆形
-    var isLink: Boolean = true
+/**
+ * 主要用于 控制 draw 形状等
+ */
+open class DrawInfoGroup() {
+
+    constructor(
+        isDelay: Boolean = false,
+        duration: Long = Constants.DEFAULT_DURATION,
+        interpolatorType: Int = 8
+
+    ) : this() {
+        this.duration = duration
+        this.interpolatorType = interpolatorType
+        this.isDelay = isDelay
+    }
+
+    // 头部形状
+    var firstHeadOrderInfo = Constants.DEFAULT_DRAWINFO_HEAD
+
+    // 左眼
+    var firstLeftEyeOrderInfo = Constants.DEFAULT_DRAWINFO_ORBIT
+    var secondLeftEyeOrderInfo = Constants.DEFAULT_DRAWINFO_ORBIT
+
+    // 右眼
+    var firstRightEyeOrderInfo = Constants.DEFAULT_DRAWINFO_ORBIT
+    var secondRightEyeOrderInfo = Constants.DEFAULT_DRAWINFO_ORBIT
+
+    // 嘴
+    var firstMouseOrderInfo = Constants.DEFAULT_DRAWINFO_ORBIT
+
+    // 底部托盘
+    var trayOrderInfo = Constants.DEFAULT_DRAWINFO_TRAY
+
+
     var duration: Long = Constants.DEFAULT_DURATION
     var interpolatorType: Int = 8
     var isDelay: Boolean = false
-    var radiusRatio: Float = 0.75f
-    var targetColor: Int = Constants.TRANSPARENT_COLOR
-    var centerXRatio: Float = 1f
-    var centerYRatio: Float = 1f
-    var paintStrokeWidthRatio: Float = 0f
-    var paintSytle: Paint.Style = Paint.Style.FILL_AND_STROKE
-    var paintCap: Paint.Cap = Paint.Cap.ROUND
+
+}
+
+/**
+ * 主要用于 控制 transition,scale,rotation 等信息
+ */
+open class ObjectAnimInfoGroup() {
+
+    var duration: Long = Constants.DEFAULT_DURATION
+    var interpolatorType: Int = 8
+    var isDelay: Boolean = false
+
+    constructor(
+        isDelay: Boolean = false,
+        duration: Long = Constants.DEFAULT_DURATION,
+        interpolatorType: Int = 8
+
+    ) : this() {
+        this.duration = duration
+        this.interpolatorType = interpolatorType
+        this.isDelay = isDelay
+    }
+
+
+    // 头部形状
+    var firstHeadRenderInfo = Constants.DEFAULT_RENDERINFO_HEAD
+
+    // 左眼
+    var firstLeftEyeRenderInfo = Constants.DEFAULT_RENDERINFO_LEFT_ORBIT
+    var secondLeftEyeRenderInfo = Constants.DEFAULT_RENDERINFO_LEFT_ORBIT
+
+    // 右眼
+    var firstRightEyeRenderInfo = Constants.DEFAULT_RENDERINFO_RIGHT_ORBIT
+    var secondRightEyeRenderInfo = Constants.DEFAULT_RENDERINFO_RIGHT_ORBIT
+
+    // 嘴
+    var firstMouseRenderInfo = Constants.DEFAULT_RENDERINFO_DOWN_ORBIT
+
+    // 底部托盘
+    var trayRenderInfo = Constants.DEFAULT_RENDERINFO_TRAY
+
+
+}
+
+open class DrawAndAnimInfoGroup() {
+    var renderInfoGroup = ObjectAnimInfoGroup()
+    var orderInfoGroup = DrawInfoGroup()
 }

@@ -1,10 +1,11 @@
-package com.dafay.demo.robot
+package com.dafay.demo.robot.ui.page
 
 import android.content.Context
 import android.content.Intent
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.dafay.demo.lib.base.ui.base.BaseActivity
+import com.dafay.demo.robot.R
 import com.dafay.demo.robot.databinding.ActivityHostBinding
 
 class HostActivity : BaseActivity(R.layout.activity_host) {

@@ -1,4 +1,4 @@
-package com.dafay.demo.robot
+package com.dafay.demo.robot.ui.page.preview
 
 import android.graphics.Color
 import android.graphics.Paint
@@ -19,8 +19,6 @@ import com.dafay.demo.robot.databinding.ItemCurveshapeBinding
  * @Date 2023/11/24 17:37
  */
 class CurveShapeAdapter : BaseAdapter<String>() {
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return CurveShapeHolder(ItemCurveshapeBinding.inflate(LayoutInflater.from(parent.context)))
     }
@@ -30,7 +28,6 @@ class CurveShapeAdapter : BaseAdapter<String>() {
             holder.onBindViewHolder(position, datas[position])
         }
     }
-
 
     class CurveShapeHolder : RecyclerView.ViewHolder {
 
@@ -165,11 +162,9 @@ class CurveShapeAdapter : BaseAdapter<String>() {
                 binding.csvShapeview4.changeCurveShape(
                     drawInfo4, true
                 )
-
                 binding.sbSeekbar1.progress = 100
                 binding.sbSeekbar2.progress = 20
             }
         }
-
     }
 }

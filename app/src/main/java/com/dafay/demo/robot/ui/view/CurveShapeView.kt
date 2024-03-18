@@ -1,4 +1,4 @@
-package com.dafay.demo.robot
+package com.dafay.demo.robot.ui.view
 
 import android.animation.ArgbEvaluator
 import android.content.Context
@@ -36,7 +36,7 @@ public class CurveShapeView @kotlin.jvm.JvmOverloads constructor(
     private var viewHeight = 0f
     private var centerX = 0f
 
-    private var curProgress: Float = 0f
+
 
     // 画笔
     private val paint: Paint by lazy { Paint(Paint.ANTI_ALIAS_FLAG) }        //画笔
@@ -53,6 +53,7 @@ public class CurveShapeView @kotlin.jvm.JvmOverloads constructor(
     private var paintCap = Paint.Cap.ROUND
     private var radiusRatio: Float = DEFAULT_RADIUS_RATIO
 
+    private var curProgress: Float = 0f
     private lateinit var startCurveShape: CurveShape
     private lateinit var endCurveShape: CurveShape
 
