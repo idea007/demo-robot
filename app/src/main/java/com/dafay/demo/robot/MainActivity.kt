@@ -14,6 +14,7 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
 
     private val homeItemList = ArrayList<HomeItem>().apply {
         this.add(HomeItem("贝塞尔曲线", BezierFragment::class.java))
+        this.add(HomeItem("贝塞尔曲线组成形状合集", CurveShapesPreviewFragment::class.java))
     }
 
     private lateinit var homeAdapter: HomeAdapter

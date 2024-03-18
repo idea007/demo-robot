@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="30dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:orientation="vertical">
+
+                <com.dafay.demo.robot.CurveShapeView
+                    android:id="@+id/csv_shapeview1"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:background="#1AFF0000" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="isLink=true \nPaint.Style=Fill"
+                    android:textSize="8sp" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:orientation="vertical">
+
+                <com.dafay.demo.robot.CurveShapeView
+                    android:id="@+id/csv_shapeview2"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:background="#1AFF0000" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="isLink=true \nPaint.Style=Stroke"
+                    android:textSize="8sp" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:orientation="vertical">
+
+                <com.dafay.demo.robot.CurveShapeView
+                    android:id="@+id/csv_shapeview3"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:background="#1AFF0000" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="isLink=false \nPaint.Style=Fill"
+                    android:textSize="8sp" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:orientation="vertical">
+
+                <com.dafay.demo.robot.CurveShapeView
+                    android:id="@+id/csv_shapeview4"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:background="#1AFF0000" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="isLink=false \nPaint.Style=Stroke"
+                    android:textSize="8sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <SeekBar
+            android:id="@+id/sb_seekbar1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cv_curveview2"
+            android:layout_marginTop="10dp" />
+
+        <SeekBar
+            android:id="@+id/sb_seekbar2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sb_seekbar1"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp" />
+
+        <SeekBar
+            android:id="@+id/sb_seekbar3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sb_seekbar1"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp" />
+
+    </LinearLayout>
+</FrameLayout>
+
+
