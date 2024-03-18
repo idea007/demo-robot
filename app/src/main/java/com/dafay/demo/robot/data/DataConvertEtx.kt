@@ -88,3 +88,19 @@ fun CurveShape.getCurveShapePaths(): ArrayList<Path> {
     }
     return paths
 }
+
+
+/**
+ * @param ruler 参考距离
+ */
+fun DrawInfo.getCurveShape(ruler: Float): CurveShape {
+    return CurveShapeFactory.getCurveGroupByType(
+        this.shapeType,
+        this.isLink,
+        this.radiusRatio,
+        ruler,
+        this.centerXRatio,
+        ruler,
+        this.centerXRatio
+    )
+}

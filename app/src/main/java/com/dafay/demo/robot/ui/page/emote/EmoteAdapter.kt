@@ -36,6 +36,7 @@ class EmoteAdapter : BaseAdapter<EmoteInfo>() {
             binding.fvFace.post {
                 binding.fvFace.changeEmote(emoteInfo)
             }
+//            binding.fvFace.changeEmote(emoteInfo)
         }
     }
 }

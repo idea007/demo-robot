@@ -9,7 +9,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <com.dafay.demo.robot.ui.view.FaceView
             android:id="@+id/fv_face1"
@@ -20,7 +21,7 @@
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@+id/rv_robot1"
             android:background="#1000ff00"
-            android:visibility="visible"/>
+            android:visibility="visible" />
 
 
         <com.dafay.demo.robot.ui.view.FaceView
@@ -32,7 +33,7 @@
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@+id/rv_robot2"
             android:background="#1000ff00"
-            android:visibility="visible"/>
+            android:visibility="visible" />
 
 
         <com.dafay.demo.robot.ui.view.FaceView
@@ -44,7 +45,7 @@
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@+id/rv_robot3"
             android:background="#1000ff00"
-            android:visibility="visible"/>
+            android:visibility="visible" />
 
 
     </LinearLayout>
