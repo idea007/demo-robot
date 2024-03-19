@@ -14,13 +14,14 @@ import com.dafay.demo.robot.databinding.ItemEmoteBinding
  * @Date 2023/11/24 17:37
  */
 class EmoteAdapter : BaseAdapter<EmoteInfo>() {
+    var onItemListener: EmoteHolder.OnItemListener? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return EmoteHolder(ItemEmoteBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is EmoteHolder) {
-            holder.onBindViewHolder(position, datas[position])
+            holder.onBindViewHolder(position, datas[position], onItemListener)
         }
     }
 
@@ -32,11 +33,15 @@ class EmoteAdapter : BaseAdapter<EmoteInfo>() {
             binding = itemView
         }
 
-        fun onBindViewHolder(position: Int, emoteInfo: EmoteInfo) {
-            binding.fvFace.post {
-                binding.fvFace.changeEmote(emoteInfo)
+        fun onBindViewHolder(position: Int, emoteInfo: EmoteInfo, onItemListener: OnItemListener?) {
+            binding.fvFace.changeEmote(emoteInfo)
+            binding.fvFace.setOnClickListener {
+                onItemListener?.onItemClick(position, emoteInfo)
             }
-//            binding.fvFace.changeEmote(emoteInfo)
+        }
+
+        interface OnItemListener {
+            fun onItemClick(position: Int, emoteInfo: EmoteInfo)
         }
     }
 }

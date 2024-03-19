@@ -1,4 +1,4 @@
-package com.dafay.demo.robot.ui.page.change
+package com.dafay.demo.robot.ui.page.testchange
 
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
@@ -18,7 +18,6 @@ class CurveShapeChangeFragment : BaseFragment(R.layout.fragment_curve_shape_chan
     override fun initViews() {
         binding.sbSeekbar1.max = 100
         binding.cvShape.changeVisualInfo(OliveFace.getEmote2().leftEyeVisualInfo, true, 1f)
-
     }
 
     override fun bindListener() {

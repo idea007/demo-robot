@@ -11,7 +11,7 @@ import com.dafay.demo.robot.R
 import com.dafay.demo.robot.data.HomeItem
 import com.dafay.demo.robot.databinding.ActivityMainBinding
 import com.dafay.demo.robot.ui.page.HostActivity
-import com.dafay.demo.robot.ui.page.change.CurveShapeChangeFragment
+import com.dafay.demo.robot.ui.page.testchange.CurveShapeChangeFragment
 import com.dafay.demo.robot.ui.page.emote.EmotesPreviewFragment
 import com.example.demo.biz.base.widgets.GridMarginDecoration
 
