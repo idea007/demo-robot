@@ -41,9 +41,9 @@ class EmotesPreviewFragment : BaseFragment(R.layout.fragment_emotes_preview) {
         }
         emoteAdapter.onItemListener=object :EmoteAdapter.EmoteHolder.OnItemListener{
             override fun onItemClick(position: Int, emoteInfo: EmoteInfo) {
-                binding.fvFace1.changeEmote(emoteInfo)
-                binding.fvFace2.changeEmote(emoteInfo)
-                binding.fvFace3.changeEmote(emoteInfo)
+                binding.fvFace1.changeEmote(emoteInfo,true,1f)
+                binding.fvFace2.changeEmote(emoteInfo,true,1f)
+                binding.fvFace3.changeEmote(emoteInfo,true,1f)
             }
         }
     }

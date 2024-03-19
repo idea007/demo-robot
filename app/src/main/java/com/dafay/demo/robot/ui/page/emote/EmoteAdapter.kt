@@ -34,7 +34,7 @@ class EmoteAdapter : BaseAdapter<EmoteInfo>() {
         }
 
         fun onBindViewHolder(position: Int, emoteInfo: EmoteInfo, onItemListener: OnItemListener?) {
-            binding.fvFace.changeEmote(emoteInfo)
+            binding.fvFace.changeEmote(emoteInfo,true,1f)
             binding.fvFace.setOnClickListener {
                 onItemListener?.onItemClick(position, emoteInfo)
             }

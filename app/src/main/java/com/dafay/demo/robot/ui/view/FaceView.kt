@@ -17,10 +17,7 @@ class FaceView @kotlin.jvm.JvmOverloads constructor(
     private var _binding: LayoutFaceViewBinding? = null
     val binding get() = _binding!!
 
-
     private var curProgress: Float = 0f
-    private lateinit var startEmoteInfo: EmoteInfo
-    private lateinit var endEmoteInfo: EmoteInfo
 
     init {
         _binding = LayoutFaceViewBinding.inflate(LayoutInflater.from(context), this)
@@ -31,42 +28,28 @@ class FaceView @kotlin.jvm.JvmOverloads constructor(
 
     }
 
-
-    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
-        super.onSizeChanged(w, h, oldw, oldh)
-        initStartAndEndFaceInfo()
+    fun changeEmote(emoteInfo: EmoteInfo, isInvalidate: Boolean = true, progress: Float = 0f) {
+        this.curProgress = progress
+        binding.cvFaceOrbit.changeVisualInfo(emoteInfo.faceVisualInfo, isInvalidate, progress)
+        binding.cvLeftCheekOrbit.changeVisualInfo(emoteInfo.leftCheekVisualInfo, isInvalidate, progress)
+        binding.cvLeftEyeOrbit.changeVisualInfo(emoteInfo.leftEyeVisualInfo, isInvalidate, progress)
+        binding.cvRightCheekOrbit.changeVisualInfo(emoteInfo.rightCheekVisualInfo, isInvalidate, progress)
+        binding.cvRightEyeOrbit.changeVisualInfo(emoteInfo.rightEyeVisualInfo, isInvalidate, progress)
+        binding.cvMouseOrbit.changeVisualInfo(emoteInfo.mouseVisualInfo, isInvalidate, progress)
     }
 
-    private fun initStartAndEndFaceInfo() {
-        startEmoteInfo = EmoteInfo()
-        endEmoteInfo = startEmoteInfo
+    fun setProgress(progress: Float) {
+        this.curProgress = progress
+        binding.cvFaceOrbit.setProgress(progress)
+        binding.cvLeftCheekOrbit.setProgress(progress)
+        binding.cvLeftEyeOrbit.setProgress(progress)
+        binding.cvRightCheekOrbit.setProgress(progress)
+        binding.cvRightEyeOrbit.setProgress(progress)
+        binding.cvMouseOrbit.setProgress(progress)
     }
-
-
-    fun changeEmote(emoteInfo: EmoteInfo, isInvalidate: Boolean = true, progress: Float? = null) {
-        // TODO: 获取当前状态的 EmoteInfo
-        var tempEmoteInfo = EmoteInfo()
-        tempEmoteInfo.faceVisualInfo = binding.cvFaceOrbit.getCurrentVisualInfo()
-        tempEmoteInfo.leftCheekVisualInfo = binding.cvLeftCheekOrbit.getCurrentVisualInfo()
-        tempEmoteInfo.leftEyeVisualInfo = binding.cvLeftEyeOrbit.getCurrentVisualInfo()
-        tempEmoteInfo.rightCheekVisualInfo = binding.cvRightCheekOrbit.getCurrentVisualInfo()
-        tempEmoteInfo.rightEyeVisualInfo = binding.cvRightEyeOrbit.getCurrentVisualInfo()
-        tempEmoteInfo.mouseVisualInfo = binding.cvMouseOrbit.getCurrentVisualInfo()
-        startEmoteInfo = tempEmoteInfo
-        endEmoteInfo = emoteInfo
-        binding.cvFaceOrbit.changeVisualInfo(emoteInfo.faceVisualInfo,true,1f)
-        binding.cvLeftCheekOrbit.changeVisualInfo(emoteInfo.leftCheekVisualInfo,true,1f)
-        binding.cvLeftEyeOrbit.changeVisualInfo(emoteInfo.leftEyeVisualInfo,true,1f)
-        binding.cvRightCheekOrbit.changeVisualInfo(emoteInfo.rightCheekVisualInfo,true,1f)
-        binding.cvRightEyeOrbit.changeVisualInfo(emoteInfo.rightEyeVisualInfo,true,1f)
-        binding.cvMouseOrbit.changeVisualInfo(emoteInfo.mouseVisualInfo,true,1f)
-    }
-
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         _binding = null
     }
-
-
 }

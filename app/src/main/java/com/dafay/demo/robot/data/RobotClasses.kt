@@ -240,14 +240,12 @@ open class EmoteInfo {
     var duration: Long = Constants.DEFAULT_DURATION
     var interpolatorType: Int = 8
     var isDelay: Boolean = false
-
     var faceVisualInfo = VisualInfo(DrawInfoConst.DEFAULT_DRAWINFO_FACE, ViewPropertyInfoConst.DEFAULT_RENDERINFO_FACE)
     var leftEyeVisualInfo = VisualInfo(DrawInfoConst.DEFAULT_DRAWINFO_ORBIT, ViewPropertyInfoConst.DEFAULT_RENDERINFO_LEFT_ORBIT)
     var leftCheekVisualInfo = VisualInfo(DrawInfoConst.DEFAULT_DRAWINFO_ORBIT, ViewPropertyInfoConst.DEFAULT_RENDERINFO_LEFT_ORBIT)
-    var rightEyeVisualInfo = VisualInfo(DrawInfoConst.DEFAULT_DRAWINFO_FACE, ViewPropertyInfoConst.DEFAULT_RENDERINFO_RIGHT_ORBIT)
-    var rightCheekVisualInfo = VisualInfo(DrawInfoConst.DEFAULT_DRAWINFO_FACE, ViewPropertyInfoConst.DEFAULT_RENDERINFO_RIGHT_ORBIT)
+    var rightEyeVisualInfo = VisualInfo(DrawInfoConst.DEFAULT_DRAWINFO_ORBIT, ViewPropertyInfoConst.DEFAULT_RENDERINFO_RIGHT_ORBIT)
+    var rightCheekVisualInfo = VisualInfo(DrawInfoConst.DEFAULT_DRAWINFO_ORBIT, ViewPropertyInfoConst.DEFAULT_RENDERINFO_RIGHT_ORBIT)
     var mouseVisualInfo = VisualInfo(DrawInfoConst.DEFAULT_DRAWINFO_ORBIT, ViewPropertyInfoConst.DEFAULT_RENDERINFO_DOWN_ORBIT)
-
 }
 
 ///**
