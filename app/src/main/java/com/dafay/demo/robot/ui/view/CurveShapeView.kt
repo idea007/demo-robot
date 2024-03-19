@@ -1,6 +1,8 @@
 package com.dafay.demo.robot.ui.view
 
+import android.animation.Animator
 import android.animation.ArgbEvaluator
+import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
@@ -12,12 +14,15 @@ import com.dafay.demo.lib.base.utils.debug
 import com.dafay.demo.robot.data.VisualInfo
 import com.dafay.demo.robot.data.CurveShape
 import com.dafay.demo.robot.data.DrawInfo
+import com.dafay.demo.robot.data.EmoteInfo
 import com.dafay.demo.robot.data.ViewPropertyInfo
 import com.dafay.demo.robot.data.getCurrentCurveShape
 import com.dafay.demo.robot.data.getCurrentViewPropertyInfo
 import com.dafay.demo.robot.data.getCurveShape
 import com.dafay.demo.robot.data.getCurveShapePaths
 import com.dafay.demo.robot.data.updateViewPropertyByProgress
+import com.dafay.demo.robot.utils.AnimExecCallback
+import com.dafay.demo.robot.utils.MultiAnimatorListener
 import com.google.gson.Gson
 
 public class CurveShapeView @kotlin.jvm.JvmOverloads constructor(
@@ -25,9 +30,6 @@ public class CurveShapeView @kotlin.jvm.JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
-
-    private val TAG = CurveShapeView::class.java.name
-    private val gson: Gson by lazy { Gson() }
 
     // 默认颜色 透明
     private var DEFAULT_COLOR = Color.TRANSPARENT
@@ -159,37 +161,6 @@ public class CurveShapeView @kotlin.jvm.JvmOverloads constructor(
     }
 
 
-//    /**
-//     * 基于 pregress 更新当前 view 的属性
-//     * @param startViewPropertyInfo
-//     * @param endViewPropertyInfo
-//     * @param progress
-//     */
-//    private fun updateViewPropertyByProgress(
-//        startViewPropertyInfo: ViewPropertyInfo,
-//        endViewPropertyInfo: ViewPropertyInfo,
-//        progress: Float
-//    ) {
-//        this.apply {
-//            translationX =
-//                startViewPropertyInfo.translationXRatio * centerX + (endViewPropertyInfo.translationXRatio - startVisualInfo.viewPropertyInfo.translationXRatio) * centerX * progress
-//            translationY =
-//                startViewPropertyInfo.translationYRatio * centerX + (endViewPropertyInfo.translationYRatio - startViewPropertyInfo.translationYRatio) * centerX * progress
-//            scaleX =
-//                startViewPropertyInfo.scaleX + (endViewPropertyInfo.scaleX - startViewPropertyInfo.scaleX) * progress
-//            scaleY =
-//                startViewPropertyInfo.scaleY + (endViewPropertyInfo.scaleY - startViewPropertyInfo.scaleY) * progress
-//            alpha =
-//                startViewPropertyInfo.alpha + (endViewPropertyInfo.alpha - startViewPropertyInfo.alpha) * progress
-//            rotation =
-//                startViewPropertyInfo.rotation + (endViewPropertyInfo.rotation - startViewPropertyInfo.rotation) * progress
-//            rotationX =
-//                startViewPropertyInfo.rotationX + (endViewPropertyInfo.rotationX - startViewPropertyInfo.rotationX) * progress
-//            rotationY =
-//                startViewPropertyInfo.rotationY + (endViewPropertyInfo.rotationY - startViewPropertyInfo.rotationY) * progress
-//        }
-//    }
-
     /**
      * 是否需要更新画笔
      */
@@ -243,16 +214,6 @@ public class CurveShapeView @kotlin.jvm.JvmOverloads constructor(
         if (centerX <= 0f) {
             return return endVisualInfo.viewPropertyInfo
         }
-//        var viewPropertyInfo = ViewPropertyInfo()
-//        viewPropertyInfo.translationXRatio = this.translationX / this.centerX
-//        viewPropertyInfo.translationYRatio = this.translationY / this.centerX
-//        viewPropertyInfo.scaleX = this.scaleX
-//        viewPropertyInfo.scaleY = this.scaleY
-//        viewPropertyInfo.alpha = this.alpha
-//        viewPropertyInfo.rotation = this.rotation
-//        viewPropertyInfo.rotationX = this.rotationX
-//        viewPropertyInfo.rotationY = this.rotationY
-//        return viewPropertyInfo
         return this.getCurrentViewPropertyInfo(this.centerX)
     }
 
@@ -268,5 +229,43 @@ public class CurveShapeView @kotlin.jvm.JvmOverloads constructor(
         drawInfo.paintSytle = endVisualInfo.drawInfo.paintSytle
         drawInfo.paintCap = endVisualInfo.drawInfo.paintCap
         return drawInfo
+    }
+
+    // 动画执行
+    private var actionValueAnimator = ValueAnimator.ofFloat(0f, 1f)
+    fun execAnim(visualInfos: ArrayList<VisualInfo>, callback: AnimExecCallback? = null) {
+        if (visualInfos.isNullOrEmpty()) {
+            return
+        }
+        changeVisualInfo(visualInfos[0])
+        cancelAnim()
+        actionValueAnimator.setDuration(visualInfos[0].duration)
+        val listener = object : MultiAnimatorListener {
+            override fun onAnimationUpdate(valueAnimator: ValueAnimator) {
+                if (!visualInfos[0].isDelay) {
+                    setProgress(valueAnimator.animatedValue as Float)
+                }
+            }
+            override fun onAnimationEnd(animation: Animator) {
+                if (!visualInfos[0].isDelay) {
+                    setProgress(1f)
+                }
+                visualInfos.removeAt(0)
+                if (visualInfos.isEmpty()) {
+                    callback?.onAnimationAllFinish()
+                } else {
+                    execAnim(visualInfos, callback)
+                }
+            }
+        }
+        actionValueAnimator.addUpdateListener(listener)
+        actionValueAnimator.addListener(listener)
+        actionValueAnimator.start()
+    }
+
+    fun cancelAnim() {
+        actionValueAnimator.removeAllUpdateListeners()
+        actionValueAnimator.removeAllListeners()
+        actionValueAnimator.cancel()
     }
 }

@@ -3,9 +3,9 @@ package com.dafay.demo.robot.ui.page.home
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.dafay.demo.lib.base.ui.adapter.BaseAdapter
-import com.dafay.demo.robot.data.HomeItem
 import com.dafay.demo.robot.databinding.ItemHomeBinding
 
 /**
@@ -49,3 +49,5 @@ class HomeAdapter : BaseAdapter<HomeItem>() {
         }
     }
 }
+
+data class HomeItem(val title: String, val clazz: Class<out Fragment>? = null)

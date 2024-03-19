@@ -8,12 +8,14 @@ import android.view.LayoutInflater
 import android.widget.RelativeLayout
 import com.dafay.demo.robot.data.EmoteInfo
 import com.dafay.demo.robot.data.PoseInfo
+import com.dafay.demo.robot.data.ViewPropertyInfo
 import com.dafay.demo.robot.data.VisualInfo
 import com.dafay.demo.robot.data.getCurrentViewPropertyInfo
 import com.dafay.demo.robot.data.updateViewPropertyByProgress
 import com.dafay.demo.robot.databinding.LayoutRobotViewBinding
 import com.dafay.demo.robot.utils.AnimExecCallback
 import com.dafay.demo.robot.utils.MultiAnimatorListener
+import com.dafay.demo.robot.utils.ViewAnimDelegate
 
 
 class RobotView @kotlin.jvm.JvmOverloads constructor(
@@ -30,6 +32,19 @@ class RobotView @kotlin.jvm.JvmOverloads constructor(
     private var curProgress: Float = 0f
     private lateinit var startPoseInfo: PoseInfo
     private lateinit var endPoseInfo: PoseInfo
+
+    private val selfViewAnimDelegate: ViewAnimDelegate by lazy {
+        ViewAnimDelegate(this, centerX)
+    }
+
+    private val headViewAnimDelegate: ViewAnimDelegate by lazy {
+        ViewAnimDelegate(binding.flHeadContainer, centerX)
+    }
+
+    private val trayViewAnimDelegate: ViewAnimDelegate by lazy {
+        ViewAnimDelegate(binding.flTrayContainer, centerX)
+    }
+
 
     init {
         _binding = LayoutRobotViewBinding.inflate(LayoutInflater.from(context), this)
@@ -91,16 +106,14 @@ class RobotView @kotlin.jvm.JvmOverloads constructor(
         )
     }
 
-    // 动作执行动画
+    // 整体一起执行动画
     private var actionValueAnimator = ValueAnimator.ofFloat(0f, 1f)
     fun execAction(posts: ArrayList<PoseInfo>, callback: AnimExecCallback? = null) {
         if (posts.isNullOrEmpty()) {
             return
         }
         changePose(posts[0])
-        actionValueAnimator.removeAllUpdateListeners()
-        actionValueAnimator.removeAllListeners()
-        actionValueAnimator.cancel()
+        cancelActionAnim()
         actionValueAnimator.setDuration(posts[0].duration)
         val listener = object : MultiAnimatorListener {
             override fun onAnimationUpdate(valueAnimator: ValueAnimator) {
@@ -126,8 +139,22 @@ class RobotView @kotlin.jvm.JvmOverloads constructor(
         actionValueAnimator.start()
     }
 
+    private fun cancelActionAnim() {
+        actionValueAnimator.removeAllUpdateListeners()
+        actionValueAnimator.removeAllListeners()
+        actionValueAnimator.cancel()
+    }
+
+    fun execEmotesAnim(
+        emotes: ArrayList<EmoteInfo>,
+        emotesCallback: AnimExecCallback? = null
+    ) {
+        binding.fvFace.execAnim(emotes, emotesCallback)
+    }
+
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
+        cancelActionAnim()
         _binding = null
     }
 }

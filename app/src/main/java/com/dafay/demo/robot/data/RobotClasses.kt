@@ -140,21 +140,11 @@ open class ViewPropertyInfo {
     var rotation: Float = 0f
     var rotationX: Float = 0f
     var rotationY: Float = 0f
-
-    // 是否需要变换
-    var isNedeChange = true
-
-    // 是否比较过
-    var isHaveCompute = false
-
     var duration: Long = Constants.DEFAULT_DURATION
     var interpolatorType: Int = 8
     var isDelay: Boolean = false
 
-    constructor(
-        isDelay: Boolean = false, duration: Long = Constants.DEFAULT_DURATION, interpolatorType: Int = 8
-
-    ) {
+    constructor(isDelay: Boolean = false, duration: Long = Constants.DEFAULT_DURATION, interpolatorType: Int = 8) {
         this.duration = duration
         this.interpolatorType = interpolatorType
         this.isDelay = isDelay
@@ -209,9 +199,11 @@ open class ViewPropertyInfo {
  * 协调 CurveShapeView 的位置和绘制等
  */
 open class VisualInfo {
+    var duration: Long = Constants.DEFAULT_DURATION
+    var interpolatorType: Int = 8
+    var isDelay: Boolean = false
     var drawInfo = DrawInfo()
     var viewPropertyInfo = ViewPropertyInfo()
-
     constructor()
     constructor(drawInfo: DrawInfo, viewPropertyInfo: ViewPropertyInfo) {
         this.drawInfo = drawInfo

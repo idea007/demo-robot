@@ -96,6 +96,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="左看看" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_anim_luffing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="摆动" />
         </LinearLayout>
 
     </HorizontalScrollView>

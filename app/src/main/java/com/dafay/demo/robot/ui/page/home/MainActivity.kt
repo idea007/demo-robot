@@ -8,7 +8,6 @@ import com.dafay.demo.lib.base.utils.dp2px
 import com.dafay.demo.robot.ui.page.bezier.BezierFragment
 import com.dafay.demo.robot.ui.page.preview.CurveShapesPreviewFragment
 import com.dafay.demo.robot.R
-import com.dafay.demo.robot.data.HomeItem
 import com.dafay.demo.robot.databinding.ActivityMainBinding
 import com.dafay.demo.robot.ui.page.HostActivity
 import com.dafay.demo.robot.ui.page.test.CurveShapeChangeFragment
