@@ -1,6 +1,8 @@
 package com.dafay.demo.robot.data
 
 import android.graphics.Path
+import android.view.View
+import androidx.annotation.UiThread
 
 
 fun CurveShape.getCurrentCurveShape(targetCurveGroup: CurveShape, progress: Float): CurveShape {
@@ -52,7 +54,7 @@ fun CurveShape.getCurrentCurveShape(targetCurveGroup: CurveShape, progress: Floa
 fun CurveShape.getCurveShapePaths(): ArrayList<Path> {
     val paths = ArrayList<Path>()
     if (this.isLink) {
-        var path = Path()
+        val path = Path()
         path.moveTo(
             this.curveList.get(0).anchorPoint1.x,
             this.curveList.get(0).anchorPoint1.y
@@ -103,4 +105,56 @@ fun DrawInfo.getCurveShape(ruler: Float): CurveShape {
         ruler,
         this.centerXRatio
     )
+}
+
+@UiThread
+        /**
+         * 获取 view 当前属性
+         * @param ruler
+         * @return
+         */
+fun View.getCurrentViewPropertyInfo(ruler: Float): ViewPropertyInfo {
+    var viewPropertyInfo = ViewPropertyInfo()
+    viewPropertyInfo.translationXRatio = this.translationX / ruler
+    viewPropertyInfo.translationYRatio = this.translationY / ruler
+    viewPropertyInfo.scaleX = this.scaleX
+    viewPropertyInfo.scaleY = this.scaleY
+    viewPropertyInfo.alpha = this.alpha
+    viewPropertyInfo.rotation = this.rotation
+    viewPropertyInfo.rotationX = this.rotationX
+    viewPropertyInfo.rotationY = this.rotationY
+    return viewPropertyInfo
+}
+
+@UiThread
+        /**
+         * 基于 pregress 更新当前 view 的属性
+         * @param ruler 参考距离
+         * @param startViewPropertyInfo
+         * @param endViewPropertyInfo
+         * @param progress
+         */
+fun View.updateViewPropertyByProgress(
+    ruler: Float, startViewPropertyInfo: ViewPropertyInfo,
+    endViewPropertyInfo: ViewPropertyInfo,
+    progress: Float
+) {
+    this.apply {
+        translationX =
+            startViewPropertyInfo.translationXRatio * ruler + (endViewPropertyInfo.translationXRatio - startViewPropertyInfo.translationXRatio) * ruler * progress
+        translationY =
+            startViewPropertyInfo.translationYRatio * ruler + (endViewPropertyInfo.translationYRatio - startViewPropertyInfo.translationYRatio) * ruler * progress
+        scaleX =
+            startViewPropertyInfo.scaleX + (endViewPropertyInfo.scaleX - startViewPropertyInfo.scaleX) * progress
+        scaleY =
+            startViewPropertyInfo.scaleY + (endViewPropertyInfo.scaleY - startViewPropertyInfo.scaleY) * progress
+        alpha =
+            startViewPropertyInfo.alpha + (endViewPropertyInfo.alpha - startViewPropertyInfo.alpha) * progress
+        rotation =
+            startViewPropertyInfo.rotation + (endViewPropertyInfo.rotation - startViewPropertyInfo.rotation) * progress
+        rotationX =
+            startViewPropertyInfo.rotationX + (endViewPropertyInfo.rotationX - startViewPropertyInfo.rotationX) * progress
+        rotationY =
+            startViewPropertyInfo.rotationY + (endViewPropertyInfo.rotationY - startViewPropertyInfo.rotationY) * progress
+    }
 }

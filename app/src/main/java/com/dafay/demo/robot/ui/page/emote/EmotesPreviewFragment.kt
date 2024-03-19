@@ -7,10 +7,10 @@ import com.dafay.demo.lib.base.ui.base.BaseFragment
 import com.dafay.demo.robot.R
 import com.dafay.demo.robot.data.EmoteInfo
 import com.dafay.demo.robot.databinding.FragmentEmotesPreviewBinding
-import com.dafay.demo.robot.ui.face.DanboFace
-import com.dafay.demo.robot.ui.face.EmojiFace
-import com.dafay.demo.robot.ui.face.NuomiFace
-import com.dafay.demo.robot.ui.face.OliveFace
+import com.dafay.demo.robot.data.face.DanboFace
+import com.dafay.demo.robot.data.face.EmojiFace
+import com.dafay.demo.robot.data.face.NuomiFace
+import com.dafay.demo.robot.data.face.OliveFace
 
 /**
  * 表情预览

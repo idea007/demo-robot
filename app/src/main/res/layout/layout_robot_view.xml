@@ -1,98 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.dafay.demo.lib.base.ui.widgets.SquareFrameLayout
+        android:id="@+id/fl_head_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <com.dafay.demo.lib.base.ui.widgets.SquareFrameLayout
-            android:id="@+id/fl_head_container"
+        <com.dafay.demo.robot.ui.view.FaceView
+            android:id="@+id/fv_face"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        <com.dafay.demo.robot.ui.view.CurveShapeView
-                android:id="@+id/cv_head_shape"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-
-        <com.dafay.demo.robot.ui.view.CurveShapeView
-                android:id="@+id/cv_left_eye_orbit3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-
-        <com.dafay.demo.robot.ui.view.CurveShapeView
-                android:id="@+id/cv_left_eye_orbit2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-
-        <com.dafay.demo.robot.ui.view.CurveShapeView
-                android:id="@+id/cv_left_eye_orbit1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-
-
-        <com.dafay.demo.robot.ui.view.CurveShapeView
-                android:id="@+id/cv_right_eye_orbit3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-
-
-        <com.dafay.demo.robot.ui.view.CurveShapeView
-                android:id="@+id/cv_right_eye_orbit2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-
-        <com.dafay.demo.robot.ui.view.CurveShapeView
-                android:id="@+id/cv_right_eye_orbit1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-
-        <com.dafay.demo.robot.ui.view.CurveShapeView
-                android:id="@+id/cv_nose_orbit2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-
-        <com.dafay.demo.robot.ui.view.CurveShapeView
-                android:id="@+id/cv_nose_orbit1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-
-        <com.dafay.demo.robot.ui.view.CurveShapeView
-                android:id="@+id/cv_mouse_orbit2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-
-        <com.dafay.demo.robot.ui.view.CurveShapeView
-                android:id="@+id/cv_mouse_orbit1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-
+            android:layout_height="match_parent" />
 
     </com.dafay.demo.lib.base.ui.widgets.SquareFrameLayout>
 
 
     <com.dafay.demo.lib.base.ui.widgets.SquareFrameLayout
-            android:id="@+id/fl_tray_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentBottom="true">
+        android:id="@+id/fl_tray_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true">
 
         <com.dafay.demo.robot.ui.view.CurveShapeView
-                android:id="@+id/cv_tray_shape"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+            android:id="@+id/cv_tray_shape"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </com.dafay.demo.lib.base.ui.widgets.SquareFrameLayout>
 

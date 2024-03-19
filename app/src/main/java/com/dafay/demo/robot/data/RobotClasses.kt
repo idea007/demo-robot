@@ -2,6 +2,7 @@ package com.dafay.demo.robot.data
 
 import android.graphics.Paint
 import android.graphics.PointF
+import com.dafay.demo.robot.data.face.OliveFace
 import java.util.ArrayList
 
 /**
@@ -25,14 +26,7 @@ open class Curve {
         if (other !is Curve) {
             return false
         }
-        return this.anchorPoint1.x == other.anchorPoint1.x &&
-                this.anchorPoint1.y == other.anchorPoint1.y &&
-                this.contPoint1.x == other.contPoint1.x &&
-                this.contPoint1.y == other.contPoint1.y &&
-                this.contPoint2.x == other.contPoint2.x &&
-                this.contPoint2.y == other.contPoint2.y &&
-                this.anchorPoint2.x == other.anchorPoint2.x &&
-                this.anchorPoint2.y == other.anchorPoint2.y
+        return this.anchorPoint1.x == other.anchorPoint1.x && this.anchorPoint1.y == other.anchorPoint1.y && this.contPoint1.x == other.contPoint1.x && this.contPoint1.y == other.contPoint1.y && this.contPoint2.x == other.contPoint2.x && this.contPoint2.y == other.contPoint2.y && this.anchorPoint2.x == other.anchorPoint2.x && this.anchorPoint2.y == other.anchorPoint2.y
     }
 }
 
@@ -67,9 +61,7 @@ open class CurveShape {
                     return false
                 }
             }
-            return this.isLink == other.isLink &&
-                    this.centerX == other.centerX &&
-                    this.centerY == other.centerY
+            return this.isLink == other.isLink && this.centerX == other.centerX && this.centerY == other.centerY
         } else {
             return false
         }
@@ -109,8 +101,10 @@ open class DrawInfo {
         animType: String = CurveShapeFactory.形状_圆形,
         isLink: Boolean = true,
         duration: Long = Constants.DEFAULT_DURATION,
-        interpolatorType: Int = 8, isDelay: Boolean = false,
-        centerXRatio: Float = 1f, centerYRatio: Float = 1f,
+        interpolatorType: Int = 8,
+        isDelay: Boolean = false,
+        centerXRatio: Float = 1f,
+        centerYRatio: Float = 1f,
         paintStrokeWidthRatio: Float = 0f,
         paintSytle: Paint.Style = Paint.Style.FILL_AND_STROKE,
         paintCap: Paint.Cap = Paint.Cap.ROUND
@@ -158,9 +152,7 @@ open class ViewPropertyInfo {
     var isDelay: Boolean = false
 
     constructor(
-        isDelay: Boolean = false,
-        duration: Long = Constants.DEFAULT_DURATION,
-        interpolatorType: Int = 8
+        isDelay: Boolean = false, duration: Long = Constants.DEFAULT_DURATION, interpolatorType: Int = 8
 
     ) {
         this.duration = duration
@@ -206,14 +198,7 @@ open class ViewPropertyInfo {
         other ?: return false
 
         if (other is ViewPropertyInfo) {
-            return this.translationXRatio == other.translationXRatio &&
-                    this.translationYRatio == other.translationYRatio &&
-                    this.scaleX == other.scaleX &&
-                    this.scaleY == other.scaleY &&
-                    this.alpha == other.alpha &&
-                    this.rotation == other.rotation &&
-                    this.rotationX == other.rotationX &&
-                    this.rotationY == other.rotationY
+            return this.translationXRatio == other.translationXRatio && this.translationYRatio == other.translationYRatio && this.scaleX == other.scaleX && this.scaleY == other.scaleY && this.alpha == other.alpha && this.rotation == other.rotation && this.rotationX == other.rotationX && this.rotationY == other.rotationY
         } else {
             return false
         }
@@ -227,6 +212,7 @@ open class VisualInfo {
     var drawInfo = DrawInfo()
     var viewPropertyInfo = ViewPropertyInfo()
 
+    constructor()
     constructor(drawInfo: DrawInfo, viewPropertyInfo: ViewPropertyInfo) {
         this.drawInfo = drawInfo
         this.viewPropertyInfo = viewPropertyInfo
@@ -248,88 +234,27 @@ open class EmoteInfo {
     var mouseVisualInfo = VisualInfo(DrawInfoConst.DEFAULT_DRAWINFO_ORBIT, ViewPropertyInfoConst.DEFAULT_RENDERINFO_DOWN_ORBIT)
 }
 
-///**
-// * 主要用于 控制 draw 形状等
-// */
-//open class DrawInfoGroup() {
-//
-//    constructor(
-//        isDelay: Boolean = false,
-//        duration: Long = Constants.DEFAULT_DURATION,
-//        interpolatorType: Int = 8
-//
-//    ) : this() {
-//        this.duration = duration
-//        this.interpolatorType = interpolatorType
-//        this.isDelay = isDelay
-//    }
-//
-//    // 头部形状
-//    var firstHeadOrderInfo = DrawInfoConst.DEFAULT_DRAWINFO_FACE
-//
-//    // 左眼
-//    var firstLeftEyeOrderInfo = DrawInfoConst.DEFAULT_DRAWINFO_ORBIT
-//    var secondLeftEyeOrderInfo = DrawInfoConst.DEFAULT_DRAWINFO_ORBIT
-//
-//    // 右眼
-//    var firstRightEyeOrderInfo = DrawInfoConst.DEFAULT_DRAWINFO_ORBIT
-//    var secondRightEyeOrderInfo = DrawInfoConst.DEFAULT_DRAWINFO_ORBIT
-//
-//    // 嘴
-//    var firstMouseOrderInfo = DrawInfoConst.DEFAULT_DRAWINFO_ORBIT
-//
-//    // 底部托盘
-//    var trayOrderInfo = DrawInfoConst.DEFAULT_DRAWINFO_TRAY
-//
-//
-//    var duration: Long = Constants.DEFAULT_DURATION
-//    var interpolatorType: Int = 8
-//    var isDelay: Boolean = false
-//
-//}
-//
-///**
-// * 主要用于 控制 transition,scale,rotation 等信息
-// */
-//open class ObjectAnimInfoGroup() {
-//
-//    var duration: Long = Constants.DEFAULT_DURATION
-//    var interpolatorType: Int = 8
-//    var isDelay: Boolean = false
-//
-//    constructor(
-//        isDelay: Boolean = false,
-//        duration: Long = Constants.DEFAULT_DURATION,
-//        interpolatorType: Int = 8
-//
-//    ) : this() {
-//        this.duration = duration
-//        this.interpolatorType = interpolatorType
-//        this.isDelay = isDelay
-//    }
-//
-//
-//    // 头部形状
-//    var firstHeadRenderInfo = Constants.DEFAULT_RENDERINFO_HEAD
-//
-//    // 左眼
-//    var firstLeftEyeRenderInfo = Constants.DEFAULT_RENDERINFO_LEFT_ORBIT
-//    var secondLeftEyeRenderInfo = Constants.DEFAULT_RENDERINFO_LEFT_ORBIT
-//
-//    // 右眼
-//    var firstRightEyeRenderInfo = Constants.DEFAULT_RENDERINFO_RIGHT_ORBIT
-//    var secondRightEyeRenderInfo = Constants.DEFAULT_RENDERINFO_RIGHT_ORBIT
-//
-//    // 嘴
-//    var firstMouseRenderInfo = Constants.DEFAULT_RENDERINFO_DOWN_ORBIT
-//
-//    // 底部托盘
-//    var trayRenderInfo = Constants.DEFAULT_RENDERINFO_TRAY
-//
-//
-//}
-//
-//open class DrawAndAnimInfoGroup() {
-//    var renderInfoGroup = ObjectAnimInfoGroup()
-//    var orderInfoGroup = DrawInfoGroup()
-//}
+/**
+ * pose （摆pose，或者理解为动画的关键帧）
+ */
+open class PoseInfo {
+    var emoteInfo: EmoteInfo
+    var trayVisualInfo: VisualInfo
+    var robotViewPropertyInfo: ViewPropertyInfo
+    var headViewPropertyInfo: ViewPropertyInfo
+    var trayContainerViewPropertyInfo: ViewPropertyInfo
+
+    constructor(
+        emoteInfo: EmoteInfo,
+        trayVisualInfo: VisualInfo,
+        robotViewPropertyInfo: ViewPropertyInfo = ViewPropertyInfo(),
+        headViewPropertyInfo: ViewPropertyInfo = ViewPropertyInfo(),
+        trayContainerViewPropertyInfo: ViewPropertyInfo = ViewPropertyInfo()
+    ) {
+        this.emoteInfo = emoteInfo
+        this.trayVisualInfo = trayVisualInfo
+        this.robotViewPropertyInfo = robotViewPropertyInfo
+        this.headViewPropertyInfo = headViewPropertyInfo
+        this.trayContainerViewPropertyInfo = trayContainerViewPropertyInfo
+    }
+}

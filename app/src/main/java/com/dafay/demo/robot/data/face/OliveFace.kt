@@ -1,4 +1,4 @@
-package com.dafay.demo.robot.ui.face
+package com.dafay.demo.robot.data.face
 
 import android.graphics.Color
 import android.graphics.Paint
@@ -17,7 +17,7 @@ import com.dafay.demo.robot.data.ViewPropertyInfo
 object OliveFace : BaseFace() {
     override val face: String = "小白"
 
-    private val DEFAULT_FACE_COLOR = Color.parseColor("#ffffff")
+    val DEFAULT_FACE_COLOR = Color.parseColor("#ffffff")
     private val DEFAULT_EYE_COLOR = Color.parseColor("#0000FF")
 
     fun getEmote1(
@@ -158,5 +158,60 @@ object OliveFace : BaseFace() {
 
         return emoteInfo
     }
+
+
+    fun getEmoteTurnLeft(   isDelay: Boolean = false,
+                            duration: Long = Constants.DEFAULT_DURATION,
+                            interpolatorType: Int = 8): EmoteInfo {
+        var emoteInfo = EmoteInfo()
+        emoteInfo.faceVisualInfo = VisualInfo(
+            DrawInfo(
+                0.8f,
+                DEFAULT_FACE_COLOR,
+                CurveShapeFactory.形状_椭圆_1,
+                true,
+                duration,
+                interpolatorType,
+                isDelay
+            ), ViewPropertyInfo(0f, 0f, 1f, 1f)
+        )
+        emoteInfo.leftEyeVisualInfo = VisualInfo(
+            DrawInfo(
+                0.08f,
+                DEFAULT_EYE_COLOR,
+                CurveShapeFactory.形状_圆形, true,
+                duration,
+                interpolatorType,
+                isDelay,
+                1f,
+                1f,
+                0.05f,
+                Paint.Style.FILL_AND_STROKE,
+                Paint.Cap.SQUARE
+            ), ViewPropertyInfo(-0.55f, 0.2f, 0.7f, 0.9f, 1f, -10f)
+        )
+        emoteInfo.rightEyeVisualInfo = VisualInfo(
+            DrawInfo(
+                0.08f,
+                DEFAULT_EYE_COLOR,
+                CurveShapeFactory.形状_圆形, true,
+                duration,
+                interpolatorType,
+                isDelay,
+                1f,
+                1f,
+                0.05f,
+                Paint.Style.FILL_AND_STROKE,
+                Paint.Cap.SQUARE
+            ), ViewPropertyInfo(-0.1f, 0.15f, 0.8f, 1f, 1f, -5f)
+        )
+
+        emoteInfo.isDelay = isDelay
+        emoteInfo.duration = duration
+        emoteInfo.interpolatorType = interpolatorType
+
+        return emoteInfo
+    }
+
 
 }

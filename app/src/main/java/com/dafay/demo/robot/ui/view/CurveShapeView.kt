@@ -14,8 +14,10 @@ import com.dafay.demo.robot.data.CurveShape
 import com.dafay.demo.robot.data.DrawInfo
 import com.dafay.demo.robot.data.ViewPropertyInfo
 import com.dafay.demo.robot.data.getCurrentCurveShape
+import com.dafay.demo.robot.data.getCurrentViewPropertyInfo
 import com.dafay.demo.robot.data.getCurveShape
 import com.dafay.demo.robot.data.getCurveShapePaths
+import com.dafay.demo.robot.data.updateViewPropertyByProgress
 import com.google.gson.Gson
 
 public class CurveShapeView @kotlin.jvm.JvmOverloads constructor(
@@ -29,9 +31,6 @@ public class CurveShapeView @kotlin.jvm.JvmOverloads constructor(
 
     // 默认颜色 透明
     private var DEFAULT_COLOR = Color.TRANSPARENT
-
-    // 默认 mRadiusRatio 比例，这个比例相对于 mCenterX
-    private val DEFAULT_RADIUS_RATIO = 0.8f
 
     // View 宽高
     private var viewWidth = 0f
@@ -48,7 +47,6 @@ public class CurveShapeView @kotlin.jvm.JvmOverloads constructor(
     private var startStrokeWidth = 0f
     private var endStrokeWidth = 0f
     private var paintCap = Paint.Cap.ROUND
-    private var radiusRatio: Float = DEFAULT_RADIUS_RATIO
 
     private var curProgress: Float = 0f
     private lateinit var startVisualInfo: VisualInfo
@@ -103,7 +101,7 @@ public class CurveShapeView @kotlin.jvm.JvmOverloads constructor(
             this.startCurveShape = startVisualInfo.drawInfo.getCurveShape(centerX)
             updatePaint(endVisualInfo.drawInfo)
             if (curProgress > 0) {
-                updateViewPropertyByProgress(startVisualInfo.viewPropertyInfo, endVisualInfo.viewPropertyInfo, curProgress)
+                updateViewPropertyByProgress(centerX,startVisualInfo.viewPropertyInfo, endVisualInfo.viewPropertyInfo, curProgress)
             }
         }
         if (startColor != endColor) {
@@ -113,7 +111,7 @@ public class CurveShapeView @kotlin.jvm.JvmOverloads constructor(
             paint.strokeWidth = startStrokeWidth + (endStrokeWidth - startStrokeWidth) * curProgress
         }
         startCurveShape?.let {
-            cacheCurCurveShape =it.getCurrentCurveShape(endVisualInfo.drawInfo.getCurveShape(centerX), curProgress)
+            cacheCurCurveShape = it.getCurrentCurveShape(endVisualInfo.drawInfo.getCurveShape(centerX), curProgress)
             val paths = cacheCurCurveShape!!.getCurveShapePaths()
             for (path in paths) {
                 canvas.drawPath(path, paint)
@@ -139,7 +137,7 @@ public class CurveShapeView @kotlin.jvm.JvmOverloads constructor(
             this.startCurveShape = startVisualInfo.drawInfo.getCurveShape(centerX)
         }
         if (curProgress > 0) {
-            updateViewPropertyByProgress(startVisualInfo.viewPropertyInfo, endVisualInfo.viewPropertyInfo, curProgress)
+            updateViewPropertyByProgress(centerX,startVisualInfo.viewPropertyInfo, endVisualInfo.viewPropertyInfo, curProgress)
         }
         updatePaint(endVisualInfo.drawInfo)
         if (isInvalidate) {
@@ -150,7 +148,7 @@ public class CurveShapeView @kotlin.jvm.JvmOverloads constructor(
 
     fun setProgress(progress: Float) {
         curProgress = progress
-        updateViewPropertyByProgress(startVisualInfo.viewPropertyInfo, endVisualInfo.viewPropertyInfo, curProgress)
+        updateViewPropertyByProgress(centerX,startVisualInfo.viewPropertyInfo, endVisualInfo.viewPropertyInfo, curProgress)
         invalidate()
     }
 
@@ -161,36 +159,36 @@ public class CurveShapeView @kotlin.jvm.JvmOverloads constructor(
     }
 
 
-    /**
-     * 基于 pregress 更新当前 view 的属性
-     * @param startViewPropertyInfo
-     * @param endViewPropertyInfo
-     * @param progress
-     */
-    private fun updateViewPropertyByProgress(
-        startViewPropertyInfo: ViewPropertyInfo,
-        endViewPropertyInfo: ViewPropertyInfo,
-        progress: Float
-    ) {
-        this.apply {
-            translationX =
-                startViewPropertyInfo.translationXRatio * centerX + (endViewPropertyInfo.translationXRatio - startVisualInfo.viewPropertyInfo.translationXRatio) * centerX * progress
-            translationY =
-                startViewPropertyInfo.translationYRatio * centerX + (endViewPropertyInfo.translationYRatio - startViewPropertyInfo.translationYRatio) * centerX * progress
-            scaleX =
-                startViewPropertyInfo.scaleX + (endViewPropertyInfo.scaleX - startViewPropertyInfo.scaleX) * progress
-            scaleY =
-                startViewPropertyInfo.scaleY + (endViewPropertyInfo.scaleY - startViewPropertyInfo.scaleY) * progress
-            alpha =
-                startViewPropertyInfo.alpha + (endViewPropertyInfo.alpha - startViewPropertyInfo.alpha) * progress
-            rotation =
-                startViewPropertyInfo.rotation + (endViewPropertyInfo.rotation - startViewPropertyInfo.rotation) * progress
-            rotationX =
-                startViewPropertyInfo.rotationX + (endViewPropertyInfo.rotationX - startViewPropertyInfo.rotationX) * progress
-            rotationY =
-                startViewPropertyInfo.rotationY + (endViewPropertyInfo.rotationY - startViewPropertyInfo.rotationY) * progress
-        }
-    }
+//    /**
+//     * 基于 pregress 更新当前 view 的属性
+//     * @param startViewPropertyInfo
+//     * @param endViewPropertyInfo
+//     * @param progress
+//     */
+//    private fun updateViewPropertyByProgress(
+//        startViewPropertyInfo: ViewPropertyInfo,
+//        endViewPropertyInfo: ViewPropertyInfo,
+//        progress: Float
+//    ) {
+//        this.apply {
+//            translationX =
+//                startViewPropertyInfo.translationXRatio * centerX + (endViewPropertyInfo.translationXRatio - startVisualInfo.viewPropertyInfo.translationXRatio) * centerX * progress
+//            translationY =
+//                startViewPropertyInfo.translationYRatio * centerX + (endViewPropertyInfo.translationYRatio - startViewPropertyInfo.translationYRatio) * centerX * progress
+//            scaleX =
+//                startViewPropertyInfo.scaleX + (endViewPropertyInfo.scaleX - startViewPropertyInfo.scaleX) * progress
+//            scaleY =
+//                startViewPropertyInfo.scaleY + (endViewPropertyInfo.scaleY - startViewPropertyInfo.scaleY) * progress
+//            alpha =
+//                startViewPropertyInfo.alpha + (endViewPropertyInfo.alpha - startViewPropertyInfo.alpha) * progress
+//            rotation =
+//                startViewPropertyInfo.rotation + (endViewPropertyInfo.rotation - startViewPropertyInfo.rotation) * progress
+//            rotationX =
+//                startViewPropertyInfo.rotationX + (endViewPropertyInfo.rotationX - startViewPropertyInfo.rotationX) * progress
+//            rotationY =
+//                startViewPropertyInfo.rotationY + (endViewPropertyInfo.rotationY - startViewPropertyInfo.rotationY) * progress
+//        }
+//    }
 
     /**
      * 是否需要更新画笔
@@ -245,16 +243,17 @@ public class CurveShapeView @kotlin.jvm.JvmOverloads constructor(
         if (centerX <= 0f) {
             return return endVisualInfo.viewPropertyInfo
         }
-        var viewPropertyInfo = ViewPropertyInfo()
-        viewPropertyInfo.translationXRatio = this.translationX / this.centerX
-        viewPropertyInfo.translationYRatio = this.translationY / this.centerX
-        viewPropertyInfo.scaleX = this.scaleX
-        viewPropertyInfo.scaleY = this.scaleY
-        viewPropertyInfo.alpha = this.alpha
-        viewPropertyInfo.rotation = this.rotation
-        viewPropertyInfo.rotationX = this.rotationX
-        viewPropertyInfo.rotationY = this.rotationY
-        return viewPropertyInfo
+//        var viewPropertyInfo = ViewPropertyInfo()
+//        viewPropertyInfo.translationXRatio = this.translationX / this.centerX
+//        viewPropertyInfo.translationYRatio = this.translationY / this.centerX
+//        viewPropertyInfo.scaleX = this.scaleX
+//        viewPropertyInfo.scaleY = this.scaleY
+//        viewPropertyInfo.alpha = this.alpha
+//        viewPropertyInfo.rotation = this.rotation
+//        viewPropertyInfo.rotationX = this.rotationX
+//        viewPropertyInfo.rotationY = this.rotationY
+//        return viewPropertyInfo
+        return this.getCurrentViewPropertyInfo(this.centerX)
     }
 
     private fun getCurrentDrawInfo(): DrawInfo {

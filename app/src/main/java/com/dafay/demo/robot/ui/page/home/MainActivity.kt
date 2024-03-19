@@ -14,6 +14,7 @@ import com.dafay.demo.robot.ui.page.HostActivity
 import com.dafay.demo.robot.ui.page.test.CurveShapeChangeFragment
 import com.dafay.demo.robot.ui.page.emote.EmotesPreviewFragment
 import com.dafay.demo.robot.ui.page.test.EmoteChangeFragment
+import com.dafay.demo.robot.ui.page.test.RobotTestFragment
 import com.example.demo.biz.base.widgets.GridMarginDecoration
 
 class MainActivity : BaseActivity(R.layout.activity_main) {
@@ -25,6 +26,7 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
         this.add(HomeItem("形状切换测试", CurveShapeChangeFragment::class.java))
         this.add(HomeItem("形状组成的表情合集", EmotesPreviewFragment::class.java))
         this.add(HomeItem("表情切换测试", EmoteChangeFragment::class.java))
+        this.add(HomeItem("机器人测试", RobotTestFragment::class.java))
     }
 
     private lateinit var homeAdapter: HomeAdapter

@@ -1,4 +1,4 @@
-package com.dafay.demo.robot.ui.face
+package com.dafay.demo.robot.data.face
 
 /**
  * @Des
@@ -6,5 +6,5 @@ package com.dafay.demo.robot.ui.face
  * @Date 2024/3/18
  */
 abstract class BaseFace {
-    protected abstract val face:String
+    abstract val face:String
 }
