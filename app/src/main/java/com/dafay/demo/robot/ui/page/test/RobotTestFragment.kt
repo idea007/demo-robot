@@ -5,10 +5,7 @@ import android.widget.SeekBar.OnSeekBarChangeListener
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.dafay.demo.lib.base.ui.base.BaseFragment
 import com.dafay.demo.robot.R
-import com.dafay.demo.robot.databinding.FragmentEmoteChangeBinding
 import com.dafay.demo.robot.databinding.FragmentRobotTestBinding
-import com.dafay.demo.robot.data.face.NuomiFace
-import com.dafay.demo.robot.data.face.OliveFace
 import com.dafay.demo.robot.data.role.OliveRole
 
 /**
@@ -20,7 +17,7 @@ class RobotTestFragment : BaseFragment(R.layout.fragment_robot_test) {
 
     override fun initViews() {
         binding.sbSeekbar1.max = 100
-        binding.rvRobot.changePose(OliveRole.getDefaultPose(),true,1f)
+        binding.rvRobot.changePose(OliveRole.poseDefault(),true,1f)
     }
 
     override fun bindListener() {
@@ -39,12 +36,17 @@ class RobotTestFragment : BaseFragment(R.layout.fragment_robot_test) {
         })
 
         binding.btnChange1.setOnClickListener {
-            binding.rvRobot.changePose(OliveRole.getTrunLeftPose(),true,1f)
+            binding.rvRobot.changePose(OliveRole.poseTrunLeft(),true,1f)
             binding.sbSeekbar1.progress=100
         }
 
         binding.btnChange2.setOnClickListener {
+            binding.rvRobot.changePose(OliveRole.poseTurnLeftCloseEyes(),true,1f)
+            binding.sbSeekbar1.progress=100
+        }
 
+        binding.btnActionLefeLoke.setOnClickListener {
+            binding.rvRobot.execAction(OliveRole.actionLeftLook())
         }
     }
 }

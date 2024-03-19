@@ -1,5 +1,7 @@
 package com.dafay.demo.robot.ui.view
 
+import android.animation.Animator
+import android.animation.ValueAnimator
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -10,6 +12,8 @@ import com.dafay.demo.robot.data.VisualInfo
 import com.dafay.demo.robot.data.getCurrentViewPropertyInfo
 import com.dafay.demo.robot.data.updateViewPropertyByProgress
 import com.dafay.demo.robot.databinding.LayoutRobotViewBinding
+import com.dafay.demo.robot.utils.AnimExecCallback
+import com.dafay.demo.robot.utils.MultiAnimatorListener
 
 
 class RobotView @kotlin.jvm.JvmOverloads constructor(
@@ -85,6 +89,41 @@ class RobotView @kotlin.jvm.JvmOverloads constructor(
             endPoseInfo.trayContainerViewPropertyInfo,
             progress
         )
+    }
+
+    // 动作执行动画
+    private var actionValueAnimator = ValueAnimator.ofFloat(0f, 1f)
+    fun execAction(posts: ArrayList<PoseInfo>, callback: AnimExecCallback? = null) {
+        if (posts.isNullOrEmpty()) {
+            return
+        }
+        changePose(posts[0])
+        actionValueAnimator.removeAllUpdateListeners()
+        actionValueAnimator.removeAllListeners()
+        actionValueAnimator.cancel()
+        actionValueAnimator.setDuration(posts[0].duration)
+        val listener = object : MultiAnimatorListener {
+            override fun onAnimationUpdate(valueAnimator: ValueAnimator) {
+                if (!posts[0].isDelay) {
+                    setProgress(valueAnimator.animatedValue as Float)
+                }
+            }
+
+            override fun onAnimationEnd(animation: Animator) {
+                if (!posts[0].isDelay) {
+                    setProgress(1f)
+                }
+                posts.removeAt(0)
+                if (posts.isEmpty()) {
+                    callback?.onAnimationAllFinish()
+                } else {
+                    execAction(posts, callback)
+                }
+            }
+        }
+        actionValueAnimator.addUpdateListener(listener)
+        actionValueAnimator.addListener(listener)
+        actionValueAnimator.start()
     }
 
     override fun onDetachedFromWindow() {

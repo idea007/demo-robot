@@ -160,9 +160,11 @@ object OliveFace : BaseFace() {
     }
 
 
-    fun getEmoteTurnLeft(   isDelay: Boolean = false,
-                            duration: Long = Constants.DEFAULT_DURATION,
-                            interpolatorType: Int = 8): EmoteInfo {
+    fun getEmoteTurnLeft(
+        isDelay: Boolean = false,
+        duration: Long = Constants.DEFAULT_DURATION,
+        interpolatorType: Int = 8
+    ): EmoteInfo {
         var emoteInfo = EmoteInfo()
         emoteInfo.faceVisualInfo = VisualInfo(
             DrawInfo(
@@ -213,5 +215,56 @@ object OliveFace : BaseFace() {
         return emoteInfo
     }
 
+
+    fun getEmoteCloseEyes(
+        isDelay: Boolean = false,
+        duration: Long = Constants.DEFAULT_DURATION,
+        interpolatorType: Int = 8
+    ): EmoteInfo {
+        var emoteInfo = EmoteInfo()
+        emoteInfo.faceVisualInfo = VisualInfo(
+            DrawInfo(
+                0.8f,
+                DEFAULT_FACE_COLOR,
+                CurveShapeFactory.形状_椭圆_1,
+                true,
+                duration,
+                interpolatorType,
+                isDelay
+            ), ViewPropertyInfo(0f, 0f, 1f, 1f)
+        )
+        emoteInfo.leftEyeVisualInfo = VisualInfo(
+            DrawInfo(
+                0.08f,
+                DEFAULT_EYE_COLOR,
+                CurveShapeFactory.线_横线, true,
+                duration, interpolatorType, isDelay,
+                1f,
+                1f,
+                0.05f,
+                Paint.Style.FILL_AND_STROKE,
+                Paint.Cap.ROUND
+            ), ViewPropertyInfo(-0.55f, 0.2f, 0.7f, 0.9f, 1f, -10f)
+        )
+        emoteInfo.rightEyeVisualInfo = VisualInfo(
+            DrawInfo(
+                0.08f,
+                DEFAULT_EYE_COLOR,
+                CurveShapeFactory.线_横线, true,
+                duration, interpolatorType, isDelay,
+                1f,
+                1f,
+                0.05f,
+                Paint.Style.FILL_AND_STROKE,
+                Paint.Cap.ROUND
+            ), ViewPropertyInfo(-0.1f, 0.15f, 0.8f, 1f, 1f, -5f)
+        )
+
+        emoteInfo.isDelay = isDelay
+        emoteInfo.duration = duration
+        emoteInfo.interpolatorType = interpolatorType
+
+        return emoteInfo
+    }
 
 }

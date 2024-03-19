@@ -238,13 +238,28 @@ open class EmoteInfo {
  * pose （摆pose，或者理解为动画的关键帧）
  */
 open class PoseInfo {
-    var emoteInfo: EmoteInfo
-    var trayVisualInfo: VisualInfo
-    var robotViewPropertyInfo: ViewPropertyInfo
-    var headViewPropertyInfo: ViewPropertyInfo
-    var trayContainerViewPropertyInfo: ViewPropertyInfo
+    var duration: Long = Constants.DEFAULT_DURATION
+    var interpolatorType: Int = 8
+    var isDelay: Boolean = false
+    var emoteInfo: EmoteInfo = EmoteInfo()
+    var trayVisualInfo: VisualInfo = VisualInfo()
+    var robotViewPropertyInfo: ViewPropertyInfo = ViewPropertyInfo()
+    var headViewPropertyInfo: ViewPropertyInfo = ViewPropertyInfo()
+    var trayContainerViewPropertyInfo: ViewPropertyInfo = ViewPropertyInfo()
+
+    constructor(isDelay: Boolean, duration: Long) {
+        this.isDelay = isDelay
+        this.duration = duration
+    }
+
+    constructor(emoteInfo: EmoteInfo, trayVisualInfo: VisualInfo) {
+        this.emoteInfo = emoteInfo
+        this.trayVisualInfo = trayVisualInfo
+    }
 
     constructor(
+        isDelay: Boolean = false,
+        duration: Long = Constants.DEFAULT_DURATION, interpolatorType: Int = 8,
         emoteInfo: EmoteInfo,
         trayVisualInfo: VisualInfo,
         robotViewPropertyInfo: ViewPropertyInfo = ViewPropertyInfo(),
@@ -256,5 +271,10 @@ open class PoseInfo {
         this.robotViewPropertyInfo = robotViewPropertyInfo
         this.headViewPropertyInfo = headViewPropertyInfo
         this.trayContainerViewPropertyInfo = trayContainerViewPropertyInfo
+        this.duration = duration
+        this.interpolatorType = interpolatorType
+        this.isDelay = isDelay
     }
+
+
 }

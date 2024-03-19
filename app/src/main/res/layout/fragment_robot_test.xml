@@ -32,17 +32,73 @@
         android:layout_width="match_parent"
         android:layout_height="16dp" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_change1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="向左转" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_change2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="切换到 小白" />
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingHorizontal="4dp"
+                android:text="Pose:"
+                android:textAppearance="?attr/textAppearanceTitleLarge" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_change1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="向左转" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_change2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="闭眼" />
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="16dp" />
+
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingHorizontal="4dp"
+                android:text="Action:"
+                android:textAppearance="?attr/textAppearanceTitleLarge" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_action_lefe_loke"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="左看看" />
+        </LinearLayout>
+
+    </HorizontalScrollView>
 
 
 </LinearLayout>
