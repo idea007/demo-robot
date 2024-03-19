@@ -8,15 +8,15 @@ import android.graphics.Paint
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
+import com.dafay.demo.lib.base.utils.debug
 import com.dafay.demo.robot.data.VisualInfo
 import com.dafay.demo.robot.data.CurveShape
-import com.dafay.demo.robot.data.CurveShapeFactory
 import com.dafay.demo.robot.data.DrawInfo
 import com.dafay.demo.robot.data.ViewPropertyInfo
 import com.dafay.demo.robot.data.getCurrentCurveShape
 import com.dafay.demo.robot.data.getCurveShape
 import com.dafay.demo.robot.data.getCurveShapePaths
-import java.util.*
+import com.google.gson.Gson
 
 public class CurveShapeView @kotlin.jvm.JvmOverloads constructor(
     context: Context,
@@ -25,6 +25,7 @@ public class CurveShapeView @kotlin.jvm.JvmOverloads constructor(
 ) : View(context, attrs, defStyleAttr) {
 
     private val TAG = CurveShapeView::class.java.name
+    private val gson: Gson by lazy { Gson() }
 
     // 默认颜色 透明
     private var DEFAULT_COLOR = Color.TRANSPARENT
@@ -53,36 +54,34 @@ public class CurveShapeView @kotlin.jvm.JvmOverloads constructor(
     private lateinit var startVisualInfo: VisualInfo
     private lateinit var endVisualInfo: VisualInfo
 
-    // 开始时的
+    // 起始时的 curveShape
     private var startCurveShape: CurveShape? = null
 
-    // 实时的 curveShape
-    private var curCurveShape: CurveShape? = null
+    // 缓存绘制过程中生成的 curveShape，以便发送切换时作为起始
+    private var cacheCurCurveShape: CurveShape? = null
 
-
-//    private lateinit var startCurveShape: CurveShape
-//    private lateinit var endCurveShape: CurveShape
-
-
-    private var curShapeType: String = CurveShapeFactory.形状_圆形
 
     init {
-        Log.i(TAG, "----- this=${this} init()")
+        debug("init()")
         initPaint()
         initStartAndEndVisualInfo()
     }
 
     private fun initPaint() {
-        Log.i(TAG, "---- initPaint()")
         paint.isAntiAlias = true
         paint.style = Paint.Style.FILL_AND_STROKE
         paint.strokeCap = paintCap
         paint.color = DEFAULT_COLOR
     }
 
+    private fun initStartAndEndVisualInfo() {
+        startVisualInfo = VisualInfo(DrawInfo(), ViewPropertyInfo())
+        endVisualInfo = VisualInfo(DrawInfo(), ViewPropertyInfo())
+    }
+
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
-        Log.i(TAG, "----- this=${this} onSizeChanged()")
+        debug("onSizeChanged()")
         viewWidth = w.toFloat()
         viewHeight = h.toFloat()
         centerX = viewWidth / 2
@@ -92,40 +91,6 @@ public class CurveShapeView @kotlin.jvm.JvmOverloads constructor(
     }
 
 
-    fun resetRadiusRadio(radiusRadio: Float) {
-        if (radiusRadio != radiusRatio) {
-            radiusRatio = radiusRadio
-//            initStartAndEndCurveShape()
-            invalidate()
-        }
-    }
-
-
-    fun updateStrokeWidthRatio(endStrokeWidthRatio: Float, startStrokeWidthRatio: Float = 0f) {
-        this.endStrokeWidth = centerX * endStrokeWidthRatio
-        this.startStrokeWidth = centerX * startStrokeWidthRatio
-        invalidate()
-    }
-
-    private fun initStartAndEndVisualInfo() {
-        startVisualInfo = VisualInfo(DrawInfo(), ViewPropertyInfo())
-        endVisualInfo = VisualInfo(DrawInfo(), ViewPropertyInfo())
-    }
-
-//    private fun initStartAndEndCurveShape() {
-//        startCurveShape = CurveShapeFactory.getCurveGroupByType(
-//            curShapeType,
-//            true,
-//            radiusRatio,
-//            centerX,
-//            1f,
-//            centerX,
-//            1f
-//        )
-//        endCurveShape = startCurveShape
-//    }
-
-
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         drawCurveShape(canvas)
@@ -133,41 +98,27 @@ public class CurveShapeView @kotlin.jvm.JvmOverloads constructor(
 
 
     private fun drawCurveShape(canvas: Canvas) {
-        Log.i(TAG, "----- this=${this} drawCurveShape() curProgress=${curProgress} startCurveShape=${startCurveShape}")
-
-
+        // 与 changeVisualInfo 呼应，这个时候 centerX >0
+        if (startCurveShape == null) {
+            this.startCurveShape = startVisualInfo.drawInfo.getCurveShape(centerX)
+            updatePaint(endVisualInfo.drawInfo)
+            if (curProgress > 0) {
+                updateViewPropertyByProgress(startVisualInfo.viewPropertyInfo, endVisualInfo.viewPropertyInfo, curProgress)
+            }
+        }
         if (startColor != endColor) {
             paint.color = argbEvaluator.evaluate(curProgress, startColor, endColor) as Int
         }
-
         if (startStrokeWidth != endStrokeWidth) {
             paint.strokeWidth = startStrokeWidth + (endStrokeWidth - startStrokeWidth) * curProgress
         }
-
-//        if (startCurveShape == null && centerX > 0) {
-//            this.startCurveShape = startVisualInfo.drawInfo.getCurveShape(centerX)
-//            updatePaint(endVisualInfo.drawInfo)
-//            if (curProgress > 0) {
-//                updateViewPropertyByProgress(startVisualInfo.viewPropertyInfo, endVisualInfo.viewPropertyInfo, curProgress)
-//            }
-//        }
-
         startCurveShape?.let {
-            curCurveShape = startCurveShape!!.getCurrentCurveShape(endVisualInfo.drawInfo.getCurveShape(centerX), curProgress)
-            var paths = curCurveShape!!.getCurveShapePaths()
+            cacheCurCurveShape =it.getCurrentCurveShape(endVisualInfo.drawInfo.getCurveShape(centerX), curProgress)
+            val paths = cacheCurCurveShape!!.getCurveShapePaths()
             for (path in paths) {
                 canvas.drawPath(path, paint)
             }
         }
-//        canvas.drawCircle(centerX,centerX,30f,paint)
-//        paint.strokeWidth=1f
-//        canvas.drawLine(0f,0f,50f,50f,paint)
-    }
-
-    fun setProgress(progress: Float) {
-        curProgress = progress
-        updateViewPropertyByProgress(startVisualInfo.viewPropertyInfo, endVisualInfo.viewPropertyInfo, curProgress)
-        invalidate()
     }
 
     /**
@@ -177,25 +128,45 @@ public class CurveShapeView @kotlin.jvm.JvmOverloads constructor(
         this.curProgress = progress
         this.startVisualInfo = getCurrentVisualInfo()
         this.endVisualInfo = visualInfo
-
-        Log.i(TAG, "----- this=${this} changeVisualInfo() curProgress=${curProgress}")
-        if (curCurveShape != null) {
-            this.startCurveShape = curCurveShape
-        } else if (centerX > 0) {
+        debug("changeVisualInfo()")
+        // 如果 changeVisualInfo 时，还没有进行测量，直接返回，延迟到 onDraw 里面执行切换后的逻辑
+        if (centerX <= 0) {
+            return
+        }
+        if (cacheCurCurveShape != null) {
+            this.startCurveShape = cacheCurCurveShape
+        } else {
             this.startCurveShape = startVisualInfo.drawInfo.getCurveShape(centerX)
         }
-        if (curProgress > 0 && centerX > 0) {
+        if (curProgress > 0) {
             updateViewPropertyByProgress(startVisualInfo.viewPropertyInfo, endVisualInfo.viewPropertyInfo, curProgress)
         }
-        if(startCurveShape!=null){
-            updatePaint(endVisualInfo.drawInfo)
-        }
+        updatePaint(endVisualInfo.drawInfo)
         if (isInvalidate) {
             invalidate()
         }
     }
 
 
+    fun setProgress(progress: Float) {
+        curProgress = progress
+        updateViewPropertyByProgress(startVisualInfo.viewPropertyInfo, endVisualInfo.viewPropertyInfo, curProgress)
+        invalidate()
+    }
+
+    fun updateStrokeWidthRatio(endStrokeWidthRatio: Float, startStrokeWidthRatio: Float = 0f) {
+        this.endStrokeWidth = centerX * endStrokeWidthRatio
+        this.startStrokeWidth = centerX * startStrokeWidthRatio
+        invalidate()
+    }
+
+
+    /**
+     * 基于 pregress 更新当前 view 的属性
+     * @param startViewPropertyInfo
+     * @param endViewPropertyInfo
+     * @param progress
+     */
     private fun updateViewPropertyByProgress(
         startViewPropertyInfo: ViewPropertyInfo,
         endViewPropertyInfo: ViewPropertyInfo,
@@ -251,13 +222,13 @@ public class CurveShapeView @kotlin.jvm.JvmOverloads constructor(
     /**
      * 根据切换到的状态更新画笔
      */
-    private fun updatePaint(drawInfo: DrawInfo) {
+    private fun updatePaint(targetDrawInfo: DrawInfo) {
         startStrokeWidth = paint.getStrokeWidth()
-        endStrokeWidth = centerX * drawInfo.paintStrokeWidthRatio
+        endStrokeWidth = centerX * targetDrawInfo.paintStrokeWidthRatio
         startColor = paint.getColor()
-        endColor = drawInfo.targetColor
-        paint.style = drawInfo.paintSytle
-        paint.strokeCap = drawInfo.paintCap
+        endColor = targetDrawInfo.targetColor
+        paint.style = targetDrawInfo.paintSytle
+        paint.strokeCap = targetDrawInfo.paintCap
     }
 
     /**
@@ -271,6 +242,9 @@ public class CurveShapeView @kotlin.jvm.JvmOverloads constructor(
     }
 
     private fun getCurrentViewPropertyInfo(): ViewPropertyInfo {
+        if (centerX <= 0f) {
+            return return endVisualInfo.viewPropertyInfo
+        }
         var viewPropertyInfo = ViewPropertyInfo()
         viewPropertyInfo.translationXRatio = this.translationX / this.centerX
         viewPropertyInfo.translationYRatio = this.translationY / this.centerX

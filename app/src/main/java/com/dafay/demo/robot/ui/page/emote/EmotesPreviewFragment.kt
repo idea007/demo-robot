@@ -16,7 +16,7 @@ class EmotesPreviewFragment : BaseFragment(R.layout.fragment_emotes_preview) {
     override val binding: FragmentEmotesPreviewBinding by viewBinding()
     private lateinit var emoteAdapter: EmoteAdapter
     private val emotes = ArrayList<EmoteInfo>().apply {
-        add(OliveFace.getEmoteOne())
+        add(OliveFace.getEmote1())
         add(OliveFace.getEmote2())
     }
 
