@@ -1,14 +1,12 @@
 package com.dafay.demo.robot.data
 
-import com.dafay.demo.robot.data.BezierDataUtils.getCurve
 import com.dafay.demo.robot.data.Constants.C
 
 
 /**
  * 针对机器人--眼睛 数据的帮助类 ，只处理 四段 三阶的贝塞尔曲线
  */
-object BezierDataHelper {
-
+object BezierDataRepository {
 
     /*************************** shape style **************************/
 
@@ -16,13 +14,11 @@ object BezierDataHelper {
      * 获取一个圆形
      */
     fun getShapeCircle(centerX: Float, centerY: Float, radius: Float, isLink: Boolean = true): CurveShape {
-
         var curveGroup = CurveShape()
         curveGroup.centerX = centerX
         curveGroup.centerY = centerY
         curveGroup.radius = radius
         curveGroup.isLink = isLink
-
         curveGroup.curveList.add(
             getCurve(
                 centerX, centerY, radius,
@@ -122,7 +118,6 @@ object BezierDataHelper {
         return curveGroup
 
     }
-
 
     /**
      * 获取下半圆形状 2
@@ -234,7 +229,6 @@ object BezierDataHelper {
         return curveGroup
     }
 
-
     /**
      * 获取下半圆形状 4
      */
@@ -289,7 +283,6 @@ object BezierDataHelper {
 
         return curveGroup
     }
-
 
     /**
      * 获取下半圆形状 5
@@ -347,7 +340,6 @@ object BezierDataHelper {
         return curveGroup
     }
 
-
     /**
      * 获取下半圆形状 6
      */
@@ -404,7 +396,6 @@ object BezierDataHelper {
 
     }
 
-
     /**
      * 下半圆曲线 1
      */
@@ -460,7 +451,6 @@ object BezierDataHelper {
         return curveGroup
     }
 
-
     /**
      * 下半圆曲线 2
      */
@@ -515,7 +505,6 @@ object BezierDataHelper {
 
         return curveGroup
     }
-
 
     /**
      * 下半圆曲线 3
@@ -573,7 +562,6 @@ object BezierDataHelper {
         return curveGroup
     }
 
-
     /**
      * 获取下半圆形状 6
      */
@@ -630,7 +618,6 @@ object BezierDataHelper {
 
     }
 
-
     /**
      * 获取一个正方形
      */
@@ -685,17 +672,16 @@ object BezierDataHelper {
 
     }
 
-
     /**
      * 获取上半圆曲线
      */
-    fun getUpHalfCircleCurve(centerX: Float, centerY: Float, radius: Float,isLink: Boolean = true): CurveShape {
+    fun getUpHalfCircleCurve(centerX: Float, centerY: Float, radius: Float, isLink: Boolean = true): CurveShape {
 
         var curveGroup = CurveShape()
         curveGroup.centerX = centerX
         curveGroup.centerY = centerY
         curveGroup.radius = radius
-        curveGroup.isLink=isLink
+        curveGroup.isLink = isLink
 
         curveGroup.curveList.add(
             getCurve(
@@ -743,11 +729,10 @@ object BezierDataHelper {
 
     }
 
-
     /**
      * 获取一个X号
      */
-    fun getFourLineXSymble(centerX: Float, centerY: Float, radius: Float,isLink: Boolean = true): CurveShape {
+    fun getFourLineXSymble(centerX: Float, centerY: Float, radius: Float, isLink: Boolean = true): CurveShape {
 
         var curveGroup = CurveShape()
         curveGroup.centerX = centerX
@@ -813,18 +798,16 @@ object BezierDataHelper {
 
     }
 
-
-
     /**
      * 获取一个X号
      */
-    fun getXSymble(centerX: Float, centerY: Float, radius: Float,isLink: Boolean = true): CurveShape {
+    fun getXSymble(centerX: Float, centerY: Float, radius: Float, isLink: Boolean = true): CurveShape {
 
         var curveGroup = CurveShape()
         curveGroup.centerX = centerX
         curveGroup.centerY = centerY
         curveGroup.radius = radius
-        curveGroup.isLink=isLink
+        curveGroup.isLink = isLink
 
         curveGroup.curveList.add(
             getCurve(
@@ -888,14 +871,14 @@ object BezierDataHelper {
     /**
      * 获取一个小于号
      */
-    fun getLessSymble(centerX: Float, centerY: Float, radius: Float,isLink: Boolean = true): CurveShape {
+    fun getLessSymble(centerX: Float, centerY: Float, radius: Float, isLink: Boolean = true): CurveShape {
 
 
         var curveGroup = CurveShape()
         curveGroup.centerX = centerX
         curveGroup.centerY = centerY
         curveGroup.radius = radius
-        curveGroup.isLink=isLink
+        curveGroup.isLink = isLink
         curveGroup.curveList.add(
             getCurve(
                 centerX, centerY, radius,
@@ -948,13 +931,13 @@ object BezierDataHelper {
     /**
      * 获取一个大于号
      */
-    fun getGreaterSymble(centerX: Float, centerY: Float, radius: Float,isLink: Boolean = true): CurveShape {
+    fun getGreaterSymble(centerX: Float, centerY: Float, radius: Float, isLink: Boolean = true): CurveShape {
 
         var curveGroup = CurveShape()
         curveGroup.centerX = centerX
         curveGroup.centerY = centerY
         curveGroup.radius = radius
-        curveGroup.isLink=isLink
+        curveGroup.isLink = isLink
         curveGroup.curveList.add(
             getCurve(
                 centerX, centerY, radius,
@@ -1004,13 +987,13 @@ object BezierDataHelper {
     /**
      * 获取一个等边三角形
      */
-    fun getEquilateralTriangle(centerX: Float, centerY: Float, radius: Float,isLink: Boolean = true): CurveShape {
+    fun getEquilateralTriangle(centerX: Float, centerY: Float, radius: Float, isLink: Boolean = true): CurveShape {
 
         var curveGroup = CurveShape()
         curveGroup.centerX = centerX
         curveGroup.centerY = centerY
         curveGroup.radius = radius
-        curveGroup.isLink=isLink
+        curveGroup.isLink = isLink
         curveGroup.curveList.add(
             getCurve(
                 centerX, centerY, radius,
@@ -1056,17 +1039,16 @@ object BezierDataHelper {
 
     }
 
-
     /**
      * 获取一个向上箭头 不带中间的一横
      */
-    fun getUpwordArrow(centerX: Float, centerY: Float, radius: Float,isLink: Boolean = true): CurveShape {
+    fun getUpwordArrow(centerX: Float, centerY: Float, radius: Float, isLink: Boolean = true): CurveShape {
 
         var curveGroup = CurveShape()
         curveGroup.centerX = centerX
         curveGroup.centerY = centerY
         curveGroup.radius = radius
-        curveGroup.isLink=isLink
+        curveGroup.isLink = isLink
         curveGroup.curveList.add(
             getCurve(
                 centerX, centerY, radius,
@@ -1112,7 +1094,7 @@ object BezierDataHelper {
 
     }
 
-    fun getLineUpwordArrow(centerX: Float, centerY: Float, radius: Float,isLink: Boolean = true): CurveShape {
+    fun getLineUpwordArrow(centerX: Float, centerY: Float, radius: Float, isLink: Boolean = true): CurveShape {
 
         var curveGroup = CurveShape()
         curveGroup.centerX = centerX
@@ -1165,17 +1147,16 @@ object BezierDataHelper {
 
     }
 
-
     /**
      * 获取一个向下箭头 不带中间的一横
      */
-    fun getDownwordArrow(centerX: Float, centerY: Float, radius: Float,isLink: Boolean = true): CurveShape {
+    fun getDownwordArrow(centerX: Float, centerY: Float, radius: Float, isLink: Boolean = true): CurveShape {
 
         var curveGroup = CurveShape()
         curveGroup.centerX = centerX
         curveGroup.centerY = centerY
         curveGroup.radius = radius
-        curveGroup.isLink=isLink
+        curveGroup.isLink = isLink
         curveGroup.curveList.add(
             getCurve(
                 centerX, centerY, radius,
@@ -1220,17 +1201,16 @@ object BezierDataHelper {
 
     }
 
-
     /**
      * 获取一个心形
      */
-    fun getHeart(centerX: Float, centerY: Float, radius: Float,isLink: Boolean = true): CurveShape {
+    fun getHeart(centerX: Float, centerY: Float, radius: Float, isLink: Boolean = true): CurveShape {
 
         var curveGroup = CurveShape()
         curveGroup.centerX = centerX
         curveGroup.centerY = centerY
         curveGroup.radius = radius
-        curveGroup.isLink=isLink
+        curveGroup.isLink = isLink
 
         curveGroup.curveList.add(
             getCurve(
@@ -1281,13 +1261,13 @@ object BezierDataHelper {
     /**
      * 获取一条线 闭眼的样式
      */
-    fun getCloseEye(centerX: Float, centerY: Float, radius: Float,isLink: Boolean = true): CurveShape {
+    fun getCloseEye(centerX: Float, centerY: Float, radius: Float, isLink: Boolean = true): CurveShape {
 
         var curveGroup = CurveShape()
         curveGroup.centerX = centerX
         curveGroup.centerY = centerY
         curveGroup.radius = radius
-        curveGroup.isLink=isLink
+        curveGroup.isLink = isLink
 
         curveGroup.curveList.add(
             getCurve(
@@ -1340,12 +1320,12 @@ object BezierDataHelper {
     /**
      * 获取大笑的样式
      */
-    fun getLaugh(centerX: Float, centerY: Float, radius: Float,isLink: Boolean = true): CurveShape {
+    fun getLaugh(centerX: Float, centerY: Float, radius: Float, isLink: Boolean = true): CurveShape {
         var curveGroup = CurveShape()
         curveGroup.centerX = centerX
         curveGroup.centerY = centerY
         curveGroup.radius = radius
-        curveGroup.isLink=isLink
+        curveGroup.isLink = isLink
 
         curveGroup.curveList.add(
             getCurve(
@@ -1397,12 +1377,12 @@ object BezierDataHelper {
     /**
      * 获取一个 伤心形状 缺口向下的月牙
      */
-    fun getSad(centerX: Float, centerY: Float, radius: Float,isLink: Boolean = true): CurveShape {
+    fun getSad(centerX: Float, centerY: Float, radius: Float, isLink: Boolean = true): CurveShape {
         var curveGroup = CurveShape()
         curveGroup.centerX = centerX
         curveGroup.centerY = centerY
         curveGroup.radius = radius
-        curveGroup.isLink=isLink
+        curveGroup.isLink = isLink
 
         curveGroup.curveList.add(
             getCurve(
@@ -1454,12 +1434,12 @@ object BezierDataHelper {
     /**
      * 获取一个 人字形曲线 用于海豹 的嘴形
      */
-    fun getHerringboneCurve(centerX: Float, centerY: Float, radius: Float,isLink: Boolean = true): CurveShape {
+    fun getHerringboneCurve(centerX: Float, centerY: Float, radius: Float, isLink: Boolean = true): CurveShape {
         var curveGroup = CurveShape()
         curveGroup.centerX = centerX
         curveGroup.centerY = centerY
         curveGroup.radius = radius
-        curveGroup.isLink=isLink
+        curveGroup.isLink = isLink
 
         curveGroup.curveList.add(
             getCurve(
@@ -1511,12 +1491,12 @@ object BezierDataHelper {
     /**
      * 获取一个 窝窝头 形状
      */
-    fun getWoWoTouShape(centerX: Float, centerY: Float, radius: Float,isLink: Boolean = true): CurveShape {
+    fun getWoWoTouShape(centerX: Float, centerY: Float, radius: Float, isLink: Boolean = true): CurveShape {
         var curveGroup = CurveShape()
         curveGroup.centerX = centerX
         curveGroup.centerY = centerY
         curveGroup.radius = radius
-        curveGroup.isLink=isLink
+        curveGroup.isLink = isLink
 
         curveGroup.curveList.add(
             getCurve(
@@ -1566,12 +1546,12 @@ object BezierDataHelper {
     /**
      * 获取一个 红晕 形状 横向的椭圆
      */
-    fun getBlushShape(centerX: Float, centerY: Float, radius: Float,isLink: Boolean = true): CurveShape {
+    fun getBlushShape(centerX: Float, centerY: Float, radius: Float, isLink: Boolean = true): CurveShape {
         var curveGroup = CurveShape()
         curveGroup.centerX = centerX
         curveGroup.centerY = centerY
         curveGroup.radius = radius
-        curveGroup.isLink=isLink
+        curveGroup.isLink = isLink
 
         curveGroup.curveList.add(
             getCurve(
@@ -1622,12 +1602,12 @@ object BezierDataHelper {
     /**
      * 获取一个 红晕 形状 横向的椭圆
      */
-    fun getBlushShapeTwo(centerX: Float, centerY: Float, radius: Float,isLink: Boolean = true): CurveShape {
+    fun getBlushShapeTwo(centerX: Float, centerY: Float, radius: Float, isLink: Boolean = true): CurveShape {
         var curveGroup = CurveShape()
         curveGroup.centerX = centerX
         curveGroup.centerY = centerY
         curveGroup.radius = radius
-        curveGroup.isLink=isLink
+        curveGroup.isLink = isLink
 
         curveGroup.curveList.add(
             getCurve(
@@ -1678,13 +1658,13 @@ object BezierDataHelper {
     /**
      * 获取数字 0
      */
-    fun getCurveNumber0(centerX: Float, centerY: Float, radius: Float,isLink: Boolean = true): CurveShape {
+    fun getCurveNumber0(centerX: Float, centerY: Float, radius: Float, isLink: Boolean = true): CurveShape {
 
         var curveGroup = CurveShape()
         curveGroup.centerX = centerX
         curveGroup.centerY = centerY
         curveGroup.radius = radius
-        curveGroup.isLink=isLink
+        curveGroup.isLink = isLink
 
         curveGroup.curveList.add(
             getCurve(
@@ -1734,13 +1714,13 @@ object BezierDataHelper {
     /**
      * 获取数字 1
      */
-    fun getCurveNumber1(centerX: Float, centerY: Float, radius: Float,isLink: Boolean = true): CurveShape {
+    fun getCurveNumber1(centerX: Float, centerY: Float, radius: Float, isLink: Boolean = true): CurveShape {
 
         var curveGroup = CurveShape()
         curveGroup.centerX = centerX
         curveGroup.centerY = centerY
         curveGroup.radius = radius
-        curveGroup.isLink=isLink
+        curveGroup.isLink = isLink
 
         curveGroup.curveList.add(
             getCurve(
@@ -1786,500 +1766,27 @@ object BezierDataHelper {
         return curveGroup
     }
 
-    /**
-     * 获取数字 1
-     */
-    fun getCurveNumber1_1(centerX: Float, centerY: Float, radius: Float,isLink: Boolean = true): CurveShape {
-
-        var curveGroup = CurveShape()
-        curveGroup.centerX = centerX
-        curveGroup.centerY = centerY
-        curveGroup.radius = radius
-        curveGroup.isLink=isLink
-
-        curveGroup.curveList.add(
-            getCurve(
-                centerX, centerY, radius,
-                1f, 270f,
-                0.5f, 270f,
-                0.25f, 90f,
-                0.25f, 270f
-            )
-        )
-
-        curveGroup.curveList.add(
-            getCurve(
-                centerX, centerY, radius,
-                0.5f, 270f,
-                0f, 270f,
-                0.25f, 90f,
-                0.25f, 270f
-            )
-        )
-
-
-        curveGroup.curveList.add(
-            getCurve(
-                centerX, centerY, radius,
-                0f, 90f,
-                0.5f, 90f,
-                0.25f, 90f,
-                0.25f, 270f
-            )
-        )
-
-        curveGroup.curveList.add(
-            getCurve(
-                centerX, centerY, radius,
-                0.5f, 90f,
-                1f, 90f,
-                0.25f, 90f,
-                0.25f, 270f
-            )
-        )
-
-        return curveGroup
-    }
-
 
     /**
-     * 获取数字 2
+     * 获取一段三阶贝塞尔曲线
      */
-    fun getCurveNumber2(centerX: Float, centerY: Float, radius: Float,isLink: Boolean = true): CurveShape {
-
-        var curveGroup = CurveShape()
-        curveGroup.centerX = centerX
-        curveGroup.centerY = centerY
-        curveGroup.radius = radius
-        curveGroup.isLink=isLink
-
-        curveGroup.curveList.add(
-            getCurve(
-                centerX, centerY, radius,
-                1f, 270f,
-                0.7f, 315f,
-                0.25f, 45f,
-                0.25f, 225f
-            )
-        )
-
-        curveGroup.curveList.add(
-            getCurve(
-                centerX, centerY, radius,
-                0.7f, 315f,
-                0f, 315f,
-                0.25f, 135f,
-                0.25f, 315f
-            )
-        )
-
-
-        curveGroup.curveList.add(
-            getCurve(
-                centerX, centerY, radius,
-                0f, 135f,
-                0.7f, 135f,
-                0.25f, 135f,
-                0.25f, 315f
-            )
-        )
-
-        curveGroup.curveList.add(
-            getCurve(
-                centerX, centerY, radius,
-                0.7f, 135f,
-                0.7f, 45f,
-                0.25f, 0f,
-                0.25f, 180f
-            )
-        )
-
-        return curveGroup
-    }
-
-    /**
-     * 获取数字 3
-     */
-    fun getCurveNumber3(centerX: Float, centerY: Float, radius: Float,isLink: Boolean = true): CurveShape {
-
-        var curveGroup = CurveShape()
-        curveGroup.centerX = centerX
-        curveGroup.centerY = centerY
-        curveGroup.radius = radius
-        curveGroup.isLink=isLink
-
-        curveGroup.curveList.add(
-            getCurve(
-                centerX, centerY, radius,
-                0.5f, 270f,
-                0.7f, 315f,
-                0.25f, 0f,
-                0.25f, 180f
-            )
-        )
-
-        curveGroup.curveList.add(
-            getCurve(
-                centerX, centerY, radius,
-                0.7f, 315f,
-                0f, 315f,
-                0.25f, 135f,
-                0.25f, 315f
-            )
-        )
-
-
-        curveGroup.curveList.add(
-            getCurve(
-                centerX, centerY, radius,
-                0f, 0f,
-                0.7f, 0f,
-                0.25f, 0f,
-                0.25f, 180f
-            )
-        )
-
-        curveGroup.curveList.add(
-            getCurve(
-                centerX, centerY, radius,
-                0.7f, 0f,
-                0.7f, 90f,
-                0.25f, 135f,
-                0.25f, 315f
-            )
-        )
-
-        return curveGroup
-    }
-
-    /**
-     * 获取数字 4
-     */
-    fun getCurveNumber4(centerX: Float, centerY: Float, radius: Float,isLink: Boolean = true): CurveShape {
-
-        var curveGroup = CurveShape()
-        curveGroup.centerX = centerX
-        curveGroup.centerY = centerY
-        curveGroup.radius = radius
-        curveGroup.isLink=isLink
-
-        curveGroup.curveList.add(
-            getCurve(
-                centerX, centerY, radius,
-                0.6f, 270f,
-                0.424f, 225f,
-                0.2f, 135f,
-                0.2f, 315f
-            )
-        )
-
-        curveGroup.curveList.add(
-            getCurve(
-                centerX, centerY, radius,
-                0.424f, 225f,
-                0.6f, 180f,
-                0.2f, 135f,
-                0.2f, 315f
-            )
-        )
-
-
-        curveGroup.curveList.add(
-            getCurve(
-                centerX, centerY, radius,
-                0.6f, 180f,
-                0.15f, 0f,
-                0.2f, 0f,
-                0.2f, 180f
-            )
-        )
-
-        curveGroup.curveList.add(
-            getCurve(
-                centerX, centerY, radius,
-                0.2f, 270f,
-                0.3f, 90f,
-                0.2f, 90f,
-                0.2f, 270f
-            )
-        )
-
-        return curveGroup
-    }
-
-    /**
-     * 获取数字 5
-     */
-    fun getCurveNumber5(centerX: Float, centerY: Float, radius: Float,isLink: Boolean = true): CurveShape {
-
-        var curveGroup = CurveShape()
-        curveGroup.centerX = centerX
-        curveGroup.centerY = centerY
-        curveGroup.radius = radius
-        curveGroup.isLink=isLink
-
-        curveGroup.curveList.add(
-            getCurve(
-                centerX, centerY, radius,
-                0.51765f, 285f,
-                0.5f, 270f,
-                0.1f, 180f,
-                0.1f, 0f
-            )
-        )
-
-        curveGroup.curveList.add(
-            getCurve(
-                centerX, centerY, radius,
-                0.5f, 270f,
-                0.7f, 225f,
-                0.2f, 180f,
-                0.2f, 0f
-            )
-        )
-
-
-        curveGroup.curveList.add(
-            getCurve(
-                centerX, centerY, radius,
-                0.7f, 225f,
-                0f, 225f,
-                0.2f, 45f,
-                0.2f, 225f
-            )
-        )
-
-        curveGroup.curveList.add(
-            getCurve(
-                centerX, centerY, radius,
-                0f, 135f,
-                0.7f, 135f,
-                0.2f, 135f,
-                0.2f, 315f
-            )
-        )
-
-        return curveGroup
-    }
-
-    /**
-     * 获取数字 6
-     */
-    fun getCurveNumber6(centerX: Float, centerY: Float, radius: Float,isLink: Boolean = true): CurveShape {
-
-        var curveGroup = CurveShape()
-        curveGroup.centerX = centerX
-        curveGroup.centerY = centerY
-        curveGroup.radius = radius
-        curveGroup.isLink=isLink
-
-        curveGroup.curveList.add(
-            getCurve(
-                centerX, centerY, radius,
-                0.5f, 285f,
-                0f, 285f,
-                0.2f, 105f,
-                0.2f, 285f
-            )
-        )
-
-        curveGroup.curveList.add(
-            getCurve(
-                centerX, centerY, radius,
-                0f, 105f,
-                0.5f, 105f,
-                0.2f, 105f,
-                0.2f, 285f
-            )
-        )
-
-
-        curveGroup.curveList.add(
-            getCurve(
-                centerX, centerY, radius,
-                0.5f, 105f,
-                0.5f, 15f,
-                0.2f, 330f,
-                0.2f, 150f
-            )
-        )
-
-        curveGroup.curveList.add(
-            getCurve(
-                centerX, centerY, radius,
-                0.5f, 15f,
-                0f, 0f,
-                0.2f, 195f,
-                0.2f, 15f
-            )
-        )
-
-        return curveGroup
-    }
-
-    /**
-     * 获取数字 7
-     */
-    fun getCurveNumber7(centerX: Float, centerY: Float, radius: Float,isLink: Boolean = true): CurveShape {
-
-        var curveGroup = CurveShape()
-        curveGroup.centerX = centerX
-        curveGroup.centerY = centerY
-        curveGroup.radius = radius
-        curveGroup.isLink=isLink
-
-        curveGroup.curveList.add(
-            getCurve(
-                centerX, centerY, radius,
-                0f, 0f,
-                0.25f, 120f,
-                0.1f, 120f,
-                0.1f, 300f
-            )
-        )
-
-        curveGroup.curveList.add(
-            getCurve(
-                centerX, centerY, radius,
-                0.25f, 120f,
-                0.5f, 120f,
-                0.1f, 120f,
-                0.1f, 300f
-            )
-        )
-
-
-        curveGroup.curveList.add(
-            getCurve(
-                centerX, centerY, radius,
-                0.5f, 120f,
-                0.5f, 300f,
-                0.5f, 300f,
-                0.5f, 120f
-            )
-        )
-
-        curveGroup.curveList.add(
-            getCurve(
-                centerX, centerY, radius,
-                0.5f, 300f,
-                0.5f, 240f,
-                0.2f, 180f,
-                0.2f, 0f
-            )
-        )
-
-        return curveGroup
-    }
-
-    /**
-     * 获取数字 8
-     */
-    fun getCurveNumber8(centerX: Float, centerY: Float, radius: Float,isLink: Boolean = true): CurveShape {
-
-        var curveGroup = CurveShape()
-        curveGroup.centerX = centerX
-        curveGroup.centerY = centerY
-        curveGroup.radius = radius
-        curveGroup.isLink=isLink
-
-        curveGroup.curveList.add(
-            getCurve(
-                centerX, centerY, radius,
-                0.4f, 240f,
-                0.8f, 60f,
-                0.2f, 60f,
-                0.4f, 240f
-            )
-        )
-
-        curveGroup.curveList.add(
-            getCurve(
-                centerX, centerY, radius,
-                0.8f, 60f,
-                0.8f, 120f,
-                0.4f, 180f,
-                0.4f, 0f
-            )
-        )
-
-
-        curveGroup.curveList.add(
-            getCurve(
-                centerX, centerY, radius,
-                0.8f, 120f,
-                0.4f, 300f,
-                0.4f, 300f,
-                0.2f, 120f
-            )
-        )
-
-        curveGroup.curveList.add(
-            getCurve(
-                centerX, centerY, radius,
-                0.4f, 300f,
-                0.4f, 240f,
-                0.2f, 180f,
-                0.2f, 0f
-            )
-        )
-
-        return curveGroup
-    }
-
-    /**
-     * 获取数字 9
-     */
-    fun getCurveNumber9(centerX: Float, centerY: Float, radius: Float,isLink: Boolean = true): CurveShape {
-
-        var curveGroup = CurveShape()
-        curveGroup.centerX = centerX
-        curveGroup.centerY = centerY
-        curveGroup.radius = radius
-        curveGroup.isLink=isLink
-
-        curveGroup.curveList.add(
-            getCurve(
-                centerX, centerY, radius,
-                0.5f, 195f,
-                0.5f, 285f,
-                0.2f, 330f,
-                0.2f, 150f
-            )
-        )
-
-        curveGroup.curveList.add(
-            getCurve(
-                centerX, centerY, radius,
-                0.5f, 285f,
-                0f, 0f,
-                0.2f, 105f,
-                0.2f, 285f
-            )
-        )
-
-
-        curveGroup.curveList.add(
-            getCurve(
-                centerX, centerY, radius,
-                0f, 0f,
-                0.5f, 105f,
-                0.2f, 105f,
-                0.2f, 285f
-            )
-        )
-
-        curveGroup.curveList.add(
-            getCurve(
-                centerX, centerY, radius,
-                0f, 0f,
-                0.5f, 195f,
-                0.2f, 195f,
-                0.2f, 15f
-            )
-        )
-
-        return curveGroup
+    fun getCurve(
+        centerX: Float, centerY: Float, radius: Float,
+        anchorRatioTR1: Float, anchorAngle1: Float,
+        anchorRatioTR2: Float, anchorAngle2: Float,
+        contRatioTR1: Float, contAngle1: Float,
+        contRatioTR2: Float, contAngle2: Float
+    ): Curve {
+        val curve = Curve()
+        curve.anchorPoint1.x = centerX + Math.cos(Math.toRadians(anchorAngle1.toDouble())).toFloat() * radius * anchorRatioTR1
+        curve.anchorPoint1.y = centerY + Math.sin(Math.toRadians(anchorAngle1.toDouble())).toFloat() * radius * anchorRatioTR1
+        curve.contPoint1.x = curve.anchorPoint1.x + Math.cos(Math.toRadians(contAngle1.toDouble())).toFloat() * radius * contRatioTR1
+        curve.contPoint1.y = curve.anchorPoint1.y + Math.sin(Math.toRadians(contAngle1.toDouble())).toFloat() * radius * contRatioTR1
+        curve.anchorPoint2.x = centerX + Math.cos(Math.toRadians(anchorAngle2.toDouble())).toFloat() * radius * anchorRatioTR2
+        curve.anchorPoint2.y = centerY + Math.sin(Math.toRadians(anchorAngle2.toDouble())).toFloat() * radius * anchorRatioTR2
+        curve.contPoint2.x = curve.anchorPoint2.x + Math.cos(Math.toRadians(contAngle2.toDouble())).toFloat() * radius * contRatioTR2
+        curve.contPoint2.y = curve.anchorPoint2.y + Math.sin(Math.toRadians(contAngle2.toDouble())).toFloat() * radius * contRatioTR2
+        return curve
     }
 
 }

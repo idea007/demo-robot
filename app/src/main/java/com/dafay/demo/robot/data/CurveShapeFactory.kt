@@ -8,13 +8,10 @@ package com.dafay.demo.robot.data
  * @Des: 用来生成 CurveShape
  */
 object CurveShapeFactory {
-
-
     /*********************** 形状 ***********************/
 
     // 支持 Paint.Style.FILL
     val 形状_圆形 = "形状_圆形"
-
     val 形状_上半圆_1 = "形状_上半圆_1"
 
     // 下半圆
@@ -25,16 +22,11 @@ object CurveShapeFactory {
     val 形状_下半圆_5 = "形状_下半圆_5"
     val 形状_下半圆_6 = "形状_下半圆_6"
     val 形状_下半圆_7 = "形状_下半圆_7"
-
-
     val 形状_正方形 = "形状_正方形"
     val 形状_心形 = "形状_心形"
     val 形状_三角形_1 = "形状_三角形_1"
-
-
     val 形状_椭圆_窝窝头形状 = "形状_椭圆_窝窝头形状"
     val 形状_椭圆_1 = "形状_椭圆_1"
-
 
     val 线_上半圆_1 = "线_上半圆_1"
 
@@ -43,20 +35,13 @@ object CurveShapeFactory {
     val 线_下半圆_2 = "线_下半圆_2"
     val 线_下半圆_3 = "线_下半圆_3"
     val 线_下半圆_4 = "线_下半圆_4"
-
-
     val 线_横线 = "线_横线"
-
     val 线_向右箭头_1 = "线_向右箭头_1"
     val 线_向左箭头_1 = "线_向左箭头_1"
     val 线_向上箭头_1 = "线_向上箭头_1"
     val 线_向下箭头_1 = "线_向下箭头_1"
-
     val 线_叉号_1 = "线_叉号_1"
     val 线_人字形_1 = "线_人字形_1"
-
-
-
 
     fun getCurveGroupByType(
         animType: String,
@@ -67,11 +52,9 @@ object CurveShapeFactory {
         mCenterY: Float,
         centerYRatio: Float
     ): CurveShape {
-
         when (animType) {
-
             线_下半圆_4 -> {
-                return BezierDataHelper
+                return BezierDataRepository
                     .getCurveHalfCircleFour(
                         mCenterX * centerXRatio,
                         mCenterY * centerYRatio,
@@ -81,7 +64,7 @@ object CurveShapeFactory {
             }
 
             线_下半圆_3 -> {
-                return BezierDataHelper
+                return BezierDataRepository
                     .getCurveHalfCircleThree(
                         mCenterX * centerXRatio,
                         mCenterY * centerYRatio,
@@ -91,7 +74,7 @@ object CurveShapeFactory {
             }
 
             线_下半圆_2 -> {
-                return BezierDataHelper
+                return BezierDataRepository
                     .getCurveHalfCircleTwo(
                         mCenterX * centerXRatio,
                         mCenterY * centerYRatio,
@@ -100,9 +83,8 @@ object CurveShapeFactory {
                     )
             }
 
-
             线_下半圆_1 -> {
-                return BezierDataHelper
+                return BezierDataRepository
                     .getCurveHalfCircleOne(
                         mCenterX * centerXRatio,
                         mCenterY * centerYRatio,
@@ -111,9 +93,8 @@ object CurveShapeFactory {
                     )
             }
 
-
             形状_下半圆_6 -> {
-                return BezierDataHelper
+                return BezierDataRepository
                     .getShapeHalfCircleSix(
                         mCenterX * centerXRatio,
                         mCenterY * centerYRatio,
@@ -122,9 +103,8 @@ object CurveShapeFactory {
                     )
             }
 
-
             形状_下半圆_5 -> {
-                return BezierDataHelper
+                return BezierDataRepository
                     .getShapeHalfCircleFive(
                         mCenterX * centerXRatio,
                         mCenterY * centerYRatio,
@@ -134,7 +114,7 @@ object CurveShapeFactory {
             }
 
             形状_下半圆_4 -> {
-                return BezierDataHelper
+                return BezierDataRepository
                     .getShapeHalfCircleFour(
                         mCenterX * centerXRatio,
                         mCenterY * centerYRatio,
@@ -145,7 +125,7 @@ object CurveShapeFactory {
             }
 
             形状_下半圆_3 -> {
-                return BezierDataHelper
+                return BezierDataRepository
                     .getShapeHalfCircleThree(
                         mCenterX * centerXRatio,
                         mCenterY * centerYRatio,
@@ -155,7 +135,7 @@ object CurveShapeFactory {
             }
 
             形状_下半圆_2 -> {
-                return BezierDataHelper
+                return BezierDataRepository
                     .getShapeHalfCircleTwo(
                         mCenterX * centerXRatio,
                         mCenterY * centerYRatio,
@@ -164,9 +144,8 @@ object CurveShapeFactory {
                     )
             }
 
-
             形状_下半圆_1 -> {
-                return BezierDataHelper
+                return BezierDataRepository
                     .getShapeHalfCircleOne(
                         mCenterX * centerXRatio,
                         mCenterY * centerYRatio,
@@ -176,7 +155,7 @@ object CurveShapeFactory {
             }
 
             形状_圆形 -> {
-                return BezierDataHelper.getShapeCircle(
+                return BezierDataRepository.getShapeCircle(
                     mCenterX * centerXRatio,
                     mCenterY * centerYRatio,
                     mCenterX * radiusRatio,
@@ -184,26 +163,26 @@ object CurveShapeFactory {
                 )
             }
 
-
             形状_正方形 -> {
-                return BezierDataHelper.getSquare(
+                return BezierDataRepository.getSquare(
                     mCenterX * centerXRatio,
                     mCenterY * centerYRatio,
                     mCenterX * radiusRatio, isLink
                 )
             }
 
-
             线_横线 -> {
-                return BezierDataHelper
+                return BezierDataRepository
                     .getCloseEye(mCenterX * centerXRatio, mCenterY * centerYRatio, mCenterX * radiusRatio, isLink)
             }
+
             形状_心形 -> {
-                return BezierDataHelper
+                return BezierDataRepository
                     .getHeart(mCenterX * centerXRatio, mCenterY * centerYRatio, mCenterX * radiusRatio, isLink)
             }
+
             形状_三角形_1 -> {
-                return BezierDataHelper
+                return BezierDataRepository
                     .getEquilateralTriangle(
                         mCenterX * centerXRatio,
                         mCenterY * centerYRatio,
@@ -212,19 +191,20 @@ object CurveShapeFactory {
                     )
 
             }
+
             线_向右箭头_1 -> {
-                return BezierDataHelper
+                return BezierDataRepository
                     .getGreaterSymble(mCenterX * centerXRatio, mCenterY * centerYRatio, mCenterX * radiusRatio, isLink)
 
             }
+
             线_向左箭头_1 -> {
-                return BezierDataHelper
+                return BezierDataRepository
                     .getLessSymble(mCenterX * centerXRatio, mCenterY * centerYRatio, mCenterX * radiusRatio, isLink)
             }
 
-
             线_叉号_1 -> {
-                return BezierDataHelper
+                return BezierDataRepository
                     .getFourLineXSymble(
                         mCenterX * centerXRatio,
                         mCenterY * centerYRatio,
@@ -234,19 +214,18 @@ object CurveShapeFactory {
             }
 
             形状_下半圆_7 -> {
-                return BezierDataHelper
+                return BezierDataRepository
                     .getLaugh(mCenterX * centerXRatio, mCenterY * centerYRatio, mCenterX * radiusRatio, isLink)
             }
 
             形状_上半圆_1 -> {
-                return BezierDataHelper
+                return BezierDataRepository
                     .getSad(mCenterX * centerXRatio, mCenterY * centerYRatio, mCenterX * radiusRatio, isLink)
             }
 
-
             线_人字形_1 -> {
 
-                return BezierDataHelper
+                return BezierDataRepository
                     .getHerringboneCurve(
                         mCenterX * centerXRatio,
                         mCenterY * centerYRatio,
@@ -256,19 +235,19 @@ object CurveShapeFactory {
             }
 
             形状_椭圆_窝窝头形状 -> {
-                return BezierDataHelper
+                return BezierDataRepository
                     .getWoWoTouShape(mCenterX * centerXRatio, mCenterY * centerYRatio, mCenterX * radiusRatio, isLink)
 
             }
 
             形状_椭圆_1 -> {
-                return BezierDataHelper
+                return BezierDataRepository
                     .getBlushShapeTwo(mCenterX * centerXRatio, mCenterY * centerYRatio, mCenterX * radiusRatio, isLink)
 
             }
 
             线_上半圆_1 -> {
-                return BezierDataHelper
+                return BezierDataRepository
                     .getUpHalfCircleCurve(
                         mCenterX * centerXRatio,
                         mCenterY * centerYRatio,
@@ -279,25 +258,21 @@ object CurveShapeFactory {
             }
 
             线_向上箭头_1 -> {
-                return BezierDataHelper
+                return BezierDataRepository
                     .getUpwordArrow(mCenterX * centerXRatio, mCenterY * centerYRatio, mCenterX * radiusRatio, isLink)
 
             }
 
-
             线_向下箭头_1 -> {
-                return BezierDataHelper
+                return BezierDataRepository
                     .getDownwordArrow(mCenterX * centerXRatio, mCenterY * centerYRatio, mCenterX * radiusRatio, isLink)
 
             }
 
             else -> {
-                return BezierDataHelper
+                return BezierDataRepository
                     .getShapeCircle(mCenterX * centerXRatio, mCenterY * centerYRatio, mCenterX * radiusRatio, isLink)
             }
         }
-
     }
-
-
 }
