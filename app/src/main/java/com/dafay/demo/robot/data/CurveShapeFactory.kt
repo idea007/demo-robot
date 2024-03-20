@@ -3,18 +3,13 @@ package com.dafay.demo.robot.data
 /**
  *
  * @ClassName:      CurveShapeFactory
- * @Author:         idea
- * @CreateDate:     2019-08-09$ 19:35$
  * @Des: 用来生成 CurveShape
  */
 object CurveShapeFactory {
     /*********************** 形状 ***********************/
-
     // 支持 Paint.Style.FILL
     val 形状_圆形 = "形状_圆形"
     val 形状_上半圆_1 = "形状_上半圆_1"
-
-    // 下半圆
     val 形状_下半圆_1 = "形状_下半圆_1"
     val 形状_下半圆_2 = "形状_下半圆_2"
     val 形状_下半圆_3 = "形状_下半圆_3"
@@ -27,10 +22,7 @@ object CurveShapeFactory {
     val 形状_三角形_1 = "形状_三角形_1"
     val 形状_椭圆_窝窝头形状 = "形状_椭圆_窝窝头形状"
     val 形状_椭圆_1 = "形状_椭圆_1"
-
     val 线_上半圆_1 = "线_上半圆_1"
-
-    // 下半圆曲线
     val 线_下半圆_1 = "线_下半圆_1"
     val 线_下半圆_2 = "线_下半圆_2"
     val 线_下半圆_3 = "线_下半圆_3"

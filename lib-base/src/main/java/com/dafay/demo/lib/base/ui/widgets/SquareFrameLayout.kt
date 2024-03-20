@@ -4,14 +4,6 @@ import android.content.Context
 import android.util.AttributeSet
 import android.widget.FrameLayout
 
-/**
- *
- * @ClassName:      SquareFrameLayout$
- * @Description:    java类作用描述
- * @Author:         idea
- * @CreateDate:     2019-10-09$ 15:39$
- */
-
 class SquareFrameLayout : FrameLayout {
 
     constructor(context: Context) : super(context) {

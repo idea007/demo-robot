@@ -7,14 +7,6 @@ import com.dafay.demo.robot.data.ViewPropertyInfo
 import com.dafay.demo.robot.data.getCurrentViewPropertyInfo
 import com.dafay.demo.robot.data.updateViewPropertyByProgress
 
-/**
- *
- * @ClassName:      RenderAnimDelegate$
- * @Description:    java类作用描述
- * @Author:         idea
- * @CreateDate:     2019-10-09$ 18:11$
- */
-
 class ViewAnimDelegate(val targetView: View, val ruler: Float) {
 
     private var startViewPropertyInfo: ViewPropertyInfo

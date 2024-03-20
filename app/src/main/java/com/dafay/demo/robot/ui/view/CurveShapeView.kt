@@ -25,7 +25,7 @@ import com.dafay.demo.robot.utils.AnimExecCallback
 import com.dafay.demo.robot.utils.MultiAnimatorListener
 import com.google.gson.Gson
 
-public class CurveShapeView @kotlin.jvm.JvmOverloads constructor(
+class CurveShapeView @kotlin.jvm.JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -56,10 +56,8 @@ public class CurveShapeView @kotlin.jvm.JvmOverloads constructor(
 
     // 起始时的 curveShape
     private var startCurveShape: CurveShape? = null
-
     // 缓存绘制过程中生成的 curveShape，以便发送切换时作为起始
     private var cacheCurCurveShape: CurveShape? = null
-
 
     init {
         debug("init()")
@@ -90,12 +88,10 @@ public class CurveShapeView @kotlin.jvm.JvmOverloads constructor(
         paint.strokeWidth = startStrokeWidth
     }
 
-
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         drawCurveShape(canvas)
     }
-
 
     private fun drawCurveShape(canvas: Canvas) {
         // 与 changeVisualInfo 呼应，这个时候 centerX >0
@@ -147,7 +143,6 @@ public class CurveShapeView @kotlin.jvm.JvmOverloads constructor(
         }
     }
 
-
     fun setProgress(progress: Float) {
         curProgress = progress
         updateViewPropertyByProgress(centerX,startVisualInfo.viewPropertyInfo, endVisualInfo.viewPropertyInfo, curProgress)
@@ -159,7 +154,6 @@ public class CurveShapeView @kotlin.jvm.JvmOverloads constructor(
         this.startStrokeWidth = centerX * startStrokeWidthRatio
         invalidate()
     }
-
 
     /**
      * 是否需要更新画笔
@@ -186,7 +180,6 @@ public class CurveShapeView @kotlin.jvm.JvmOverloads constructor(
         }
         return isNadeUpdatePaint
     }
-
 
     /**
      * 根据切换到的状态更新画笔

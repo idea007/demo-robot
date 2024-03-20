@@ -39,10 +39,8 @@ open class CurveShape {
     var isLink = true
     var centerX = 0f
     var centerY = 0f
-
     //半径 做为一个基础值，所有的计算都基于这个值
     var radius = 0f
-
     //存储四段贝塞尔曲线
     val curveList = ArrayList<Curve>()
 
