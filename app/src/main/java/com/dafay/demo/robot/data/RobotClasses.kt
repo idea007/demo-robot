@@ -6,7 +6,7 @@ import com.dafay.demo.robot.data.face.OliveFace
 import java.util.ArrayList
 
 /**
- * 定义一段三阶贝塞尔曲线
+ * 定义一段三次贝塞尔曲线
  */
 open class Curve {
     // 锚点一

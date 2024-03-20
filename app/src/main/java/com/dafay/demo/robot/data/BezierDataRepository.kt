@@ -4,7 +4,7 @@ import com.dafay.demo.robot.data.Constants.C
 
 
 /**
- * 针对机器人--眼睛 数据的帮助类 ，只处理 四段 三阶的贝塞尔曲线
+ * 针对机器人--眼睛 数据的帮助类 ，只处理 四段 三次的贝塞尔曲线
  */
 object BezierDataRepository {
 
@@ -1768,7 +1768,7 @@ object BezierDataRepository {
 
 
     /**
-     * 获取一段三阶贝塞尔曲线
+     * 获取一段三次贝塞尔曲线
      */
     fun getCurve(
         centerX: Float, centerY: Float, radius: Float,

@@ -22,7 +22,7 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
 
     private val homeItemList = ArrayList<HomeItem>().apply {
         this.add(HomeItem("贝塞尔曲线拟合圆", BezierFragment::class.java))
-        this.add(HomeItem("三阶贝塞尔辅助坐标系", AuxiliaryBezierFragment::class.java))
+        this.add(HomeItem("三次贝塞尔辅助坐标系", AuxiliaryBezierFragment::class.java))
         this.add(HomeItem("四段贝塞尔曲线组成形状合集", CurveShapesPreviewFragment::class.java))
         this.add(HomeItem("形状切换测试", CurveShapeChangeFragment::class.java))
         this.add(HomeItem("形状组成的表情合集", EmotesPreviewFragment::class.java))

@@ -26,7 +26,6 @@ class CircleBezierView @JvmOverloads constructor(context: Context?, attrs: Attri
     private val anchors = FloatArray(8) // 顺时针记录绘制圆形的四个数据点
     private val conts = FloatArray(16) // 顺时针记录绘制圆形的八个控制点
 
-
     // 模拟从圆形变成心形
     private var isAnimActivate = false
     private val duration = 1000f // 变化总时长

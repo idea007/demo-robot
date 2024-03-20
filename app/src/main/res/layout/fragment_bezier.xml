@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="一段三阶贝塞尔曲线，拟合 1/4 圆" />
+        android:text="一段三次贝塞尔曲线，拟合 1/4 圆" />
 
     <com.dafay.demo.robot.ui.view.test.CubicBezierView
         android:layout_width="200dp"
@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="四段三阶贝塞尔曲线，拟合圆" />
+        android:text="四段三次贝塞尔曲线，拟合圆" />
 
     <com.dafay.demo.robot.ui.view.test.CircleBezierView
         android:id="@+id/cbv_circle_bezier"

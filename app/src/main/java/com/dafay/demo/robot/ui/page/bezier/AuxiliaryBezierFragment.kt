@@ -7,7 +7,7 @@ import com.dafay.demo.robot.databinding.FragmentAuxiliaryBezierBinding
 import com.dafay.demo.robot.ui.view.test.BezierAuxiliaryView
 
 /**
- * @Des 坐标系里面看 三阶贝塞尔曲线
+ * @Des 坐标系里面看 三次贝塞尔曲线
  * @Author lipengfei
  * @Date 2024/3/20
  */

@@ -11,7 +11,7 @@ import android.util.AttributeSet
 import android.view.View
 
 /**
- * 三阶 bezier 拟合 1/4 圆弧
+ * 三次 bezier 拟合 1/4 圆弧
  * @param context
  * @param attrs
  * @param defStyleAttr
@@ -104,6 +104,8 @@ public class CubicBezierView @kotlin.jvm.JvmOverloads constructor(
      */
     private fun drawAuxiliary(canvas: Canvas) {
         paint.color = Color.GRAY
+
+        paint.setStrokeWidth(16f)
         // 圆心点
         canvas.drawPoint(radius, radius, paint)
         canvas.drawPoint(anchorPoint1.x, anchorPoint1.y, paint)
@@ -111,7 +113,7 @@ public class CubicBezierView @kotlin.jvm.JvmOverloads constructor(
         canvas.drawPoint(contPoint1.x, contPoint1.y, paint)
         canvas.drawPoint(contPoint2.x, contPoint2.y, paint)
         // 绘制辅助线
-        paint.setStrokeWidth(4f)
+        paint.setStrokeWidth(12f)
         canvas.drawLine(anchorPoint1.x, anchorPoint1.y, contPoint1.x, contPoint1.y, paint)
         canvas.drawLine(anchorPoint2.x, anchorPoint2.y, contPoint2.x, contPoint2.y, paint)
     }
