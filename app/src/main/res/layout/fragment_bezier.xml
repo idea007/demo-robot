@@ -30,10 +30,19 @@
         android:text="四段三阶贝塞尔曲线，拟合圆" />
 
     <com.dafay.demo.robot.ui.view.test.CircleBezierView
+        android:id="@+id/cbv_circle_bezier"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="16dp"
         android:background="#8000ffff" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_start_anim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:text="变化到心形" />
 
 </LinearLayout>

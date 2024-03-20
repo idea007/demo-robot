@@ -8,5 +8,11 @@ import com.dafay.demo.robot.databinding.FragmentBezierBinding
 class BezierFragment : BaseFragment(R.layout.fragment_bezier) {
     override val binding: FragmentBezierBinding by viewBinding()
 
+    override fun bindListener() {
+        super.bindListener()
+        binding.btnStartAnim.setOnClickListener {
+            binding.cbvCircleBezier.startToHeartAnim()
+        }
+    }
 
 }
