@@ -11,6 +11,7 @@ import com.dafay.demo.robot.R
 import com.dafay.demo.robot.databinding.ActivityMainBinding
 import com.dafay.demo.robot.ui.page.HostActivity
 import com.dafay.demo.robot.ui.page.bezier.AuxiliaryBezierFragment
+import com.dafay.demo.robot.ui.page.bezier.MagicValueFragment
 import com.dafay.demo.robot.ui.page.test.CurveShapeChangeFragment
 import com.dafay.demo.robot.ui.page.emote.EmotesPreviewFragment
 import com.dafay.demo.robot.ui.page.test.EmoteChangeFragment
@@ -22,6 +23,7 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
 
     private val homeItemList = ArrayList<HomeItem>().apply {
         this.add(HomeItem("贝塞尔曲线拟合圆", BezierFragment::class.java))
+        this.add(HomeItem("贝塞尔曲线拟合圆 测试魔法数值", MagicValueFragment::class.java))
         this.add(HomeItem("三次贝塞尔辅助坐标系", AuxiliaryBezierFragment::class.java))
         this.add(HomeItem("四段贝塞尔曲线组成形状合集", CurveShapesPreviewFragment::class.java))
         this.add(HomeItem("形状切换测试", CurveShapeChangeFragment::class.java))
