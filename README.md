@@ -12,6 +12,7 @@ Four cubic beziers form shapes, shapes form expressions, and expressions can for
 * Difficulty in building animations
 
 ## Document Link
->[Bezier Robot](https://www.dafaycoding.com/article/android-basic-bezier-robot)
->[Fitting a Circle with Four Section Cubic Bézier Curve](https://www.dafaycoding.com/article/android-basic-bezier)
+>[我用 Bézier 曲线创造了一个机器人](https://www.dafaycoding.com/article/android-basic-bezier-robot)
+
+>[使用四段三次 Bézier 曲线拟合圆](https://www.dafaycoding.com/article/android-basic-bezier)
 
