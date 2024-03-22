@@ -16,14 +16,13 @@ object OliveRole : BaseRole() {
     override val role: String = OliveFace.face
 
     fun poseDefault(isDelay: Boolean = false, duration: Long = Constants.DEFAULT_DURATION, interpolatorType: Int = 8): PoseInfo {
-        return PoseInfo(isDelay, duration, interpolatorType, OliveFace.getEmote2(), getTrayVisualInfo1())
+        return PoseInfo(isDelay, duration, interpolatorType, OliveFace.getEmote2())
     }
 
     fun poseTrunLeft(isDelay: Boolean = false, duration: Long = Constants.DEFAULT_DURATION, interpolatorType: Int = 8): PoseInfo {
         return PoseInfo(
             isDelay, duration, interpolatorType,
             OliveFace.getEmoteTurnLeft(),
-            getTrayTurnLeft(),
             headViewPropertyInfo = ViewPropertyInfo(0f, 0f, 1f, 1f, 1f, -5f, 0f, -20f)
         )
     }
@@ -32,7 +31,6 @@ object OliveRole : BaseRole() {
         return PoseInfo(
             isDelay, duration, interpolatorType,
             OliveFace.getEmoteCloseEyes(),
-            getTrayTurnLeft(),
             headViewPropertyInfo = ViewPropertyInfo(0f, 0f, 1f, 1f, 1f, -5f, 0f, -20f)
         )
     }
@@ -62,13 +60,13 @@ object OliveRole : BaseRole() {
     }
 
 
-    private fun getTrayVisualInfo1(): VisualInfo {
+     fun getTrayVisualInfo1(): VisualInfo {
         return VisualInfo(DrawInfo(0.3f, OliveFace.DEFAULT_FACE_COLOR), Constants.DEFAULT_RENDERINFO_TRAY)
     }
-
-    private fun getTrayTurnLeft(): VisualInfo {
-        return VisualInfo(DrawInfo(0.3f, OliveFace.DEFAULT_FACE_COLOR), ViewPropertyInfo(0f, 0f, 1f, 0.2f, 1f, 3f, 0f, 20f))
-    }
+//
+//    private fun getTrayTurnLeft(): VisualInfo {
+//        return VisualInfo(DrawInfo(0.3f, OliveFace.DEFAULT_FACE_COLOR), ViewPropertyInfo(0f, 0f, 1f, 0.2f, 1f, 3f, 0f, 20f))
+//    }
 
 
 }

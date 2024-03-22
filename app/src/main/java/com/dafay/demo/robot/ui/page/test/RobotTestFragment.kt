@@ -54,7 +54,8 @@ class RobotTestFragment : BaseFragment(R.layout.fragment_robot_test) {
         }
 
         binding.btnAnimLuffing.setOnClickListener {
-            binding.rvRobot.execEmotesAnim(arrayListOf(OliveFace.getEmote1(duration = 1000)), null)
+            binding.rvRobot.luffingAnim()
+//            binding.rvRobot.execEmotesAnim(arrayListOf(OliveFace.getEmote1(duration = 1000)), null)
         }
     }
 

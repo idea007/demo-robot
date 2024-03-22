@@ -5,12 +5,17 @@ import android.animation.ValueAnimator
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.animation.LinearInterpolator
 import android.widget.RelativeLayout
+import com.dafay.demo.robot.data.Constants
+import com.dafay.demo.robot.data.DrawInfo
 import com.dafay.demo.robot.data.EmoteInfo
 import com.dafay.demo.robot.data.PoseInfo
 import com.dafay.demo.robot.data.ViewPropertyInfo
 import com.dafay.demo.robot.data.VisualInfo
+import com.dafay.demo.robot.data.face.OliveFace
 import com.dafay.demo.robot.data.getCurrentViewPropertyInfo
+import com.dafay.demo.robot.data.role.OliveRole
 import com.dafay.demo.robot.data.updateViewPropertyByProgress
 import com.dafay.demo.robot.databinding.LayoutRobotViewBinding
 import com.dafay.demo.robot.utils.AnimExecCallback
@@ -52,8 +57,9 @@ class RobotView @kotlin.jvm.JvmOverloads constructor(
     }
 
     private fun initViews() {
-        startPoseInfo = PoseInfo(EmoteInfo(), VisualInfo())
-        endPoseInfo = PoseInfo(EmoteInfo(), VisualInfo())
+        startPoseInfo = PoseInfo(EmoteInfo())
+        endPoseInfo = PoseInfo(EmoteInfo())
+        binding.cvTrayShape.changeVisualInfo(OliveRole.getTrayVisualInfo1(), true, 1f)
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
@@ -64,25 +70,19 @@ class RobotView @kotlin.jvm.JvmOverloads constructor(
     fun changePose(poseInfo: PoseInfo, isInvalidate: Boolean = true, progress: Float = 0f) {
         this.curProgress = progress
         binding.fvFace.changeEmote(poseInfo.emoteInfo, isInvalidate, progress)
-        binding.cvTrayShape.changeVisualInfo(poseInfo.trayVisualInfo, isInvalidate, progress)
+        // 是否改变颜色
+//        binding.cvTrayShape.changeVisualInfo(poseInfo.trayVisualInfo, isInvalidate, progress)
         endPoseInfo = poseInfo
         if (centerX == 0f) {
             return
         }
         startPoseInfo.robotViewPropertyInfo = this.getCurrentViewPropertyInfo(centerX)
         startPoseInfo.headViewPropertyInfo = binding.flHeadContainer.getCurrentViewPropertyInfo(centerX)
-        startPoseInfo.trayContainerViewPropertyInfo = binding.flTrayContainer.getCurrentViewPropertyInfo(centerX)
         this.updateViewPropertyByProgress(centerX, startPoseInfo.robotViewPropertyInfo, poseInfo.robotViewPropertyInfo, progress)
         binding.flHeadContainer.updateViewPropertyByProgress(
             centerX,
             startPoseInfo.headViewPropertyInfo,
             poseInfo.headViewPropertyInfo,
-            progress
-        )
-        binding.flTrayContainer.updateViewPropertyByProgress(
-            centerX,
-            startPoseInfo.trayContainerViewPropertyInfo,
-            poseInfo.trayContainerViewPropertyInfo,
             progress
         )
     }
@@ -98,12 +98,18 @@ class RobotView @kotlin.jvm.JvmOverloads constructor(
             endPoseInfo.headViewPropertyInfo,
             progress
         )
-        binding.flTrayContainer.updateViewPropertyByProgress(
-            centerX,
-            startPoseInfo.trayContainerViewPropertyInfo,
-            endPoseInfo.trayContainerViewPropertyInfo,
-            progress
-        )
+        updateTrayViewByHeadViewProperty()
+    }
+
+    /**
+     * 根据头部属性去更改底部影子的属性
+     */
+    private fun updateTrayViewByHeadViewProperty() {
+        binding.flTrayContainer.apply {
+            val headViewPropertyInfo = binding.flHeadContainer.getCurrentViewPropertyInfo(centerX)
+            scaleY = 1f + (headViewPropertyInfo.translationYRatio / 0.25f) * 0.08f
+            scaleX = 1f + (headViewPropertyInfo.translationYRatio / 0.25f) * 0.08f
+        }
     }
 
     // 整体一起执行动画
@@ -150,6 +156,22 @@ class RobotView @kotlin.jvm.JvmOverloads constructor(
         emotesCallback: AnimExecCallback? = null
     ) {
         binding.fvFace.execAnim(emotes, emotesCallback)
+    }
+
+    fun luffingAnim() {
+        val DEFALUT_SPEED = 1
+        // 上下摆动的进度
+        var curLuffingProgress = 0
+        var luffingValueAnimator = ValueAnimator.ofFloat(0f, 1f)
+        luffingValueAnimator.setInterpolator(LinearInterpolator())
+        luffingValueAnimator.setDuration(1000 * 60 * 60 * 24)
+        luffingValueAnimator.addUpdateListener(ValueAnimator.AnimatorUpdateListener { animator ->
+            curLuffingProgress += DEFALUT_SPEED
+            binding.flHeadContainer.translationY = centerX * Math.sin(Math.toRadians((curLuffingProgress % 360).toDouble()))
+                .toFloat() / 4
+            updateTrayViewByHeadViewProperty()
+        })
+        luffingValueAnimator.start()
     }
 
     override fun onDetachedFromWindow() {

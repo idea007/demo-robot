@@ -232,35 +232,28 @@ open class PoseInfo {
     var interpolatorType: Int = 8
     var isDelay: Boolean = false
     var emoteInfo: EmoteInfo = EmoteInfo()
-    var trayVisualInfo: VisualInfo = VisualInfo()
     var robotViewPropertyInfo: ViewPropertyInfo = ViewPropertyInfo()
     var headViewPropertyInfo: ViewPropertyInfo = ViewPropertyInfo()
-    var trayContainerViewPropertyInfo: ViewPropertyInfo = ViewPropertyInfo()
 
     constructor(isDelay: Boolean, duration: Long) {
         this.isDelay = isDelay
         this.duration = duration
     }
 
-    constructor(emoteInfo: EmoteInfo, trayVisualInfo: VisualInfo) {
+    constructor(emoteInfo: EmoteInfo) {
         this.emoteInfo = emoteInfo
-        this.trayVisualInfo = trayVisualInfo
     }
 
     constructor(
         isDelay: Boolean = false,
         duration: Long = Constants.DEFAULT_DURATION, interpolatorType: Int = 8,
         emoteInfo: EmoteInfo,
-        trayVisualInfo: VisualInfo,
         robotViewPropertyInfo: ViewPropertyInfo = ViewPropertyInfo(),
         headViewPropertyInfo: ViewPropertyInfo = ViewPropertyInfo(),
-        trayContainerViewPropertyInfo: ViewPropertyInfo = ViewPropertyInfo()
     ) {
         this.emoteInfo = emoteInfo
-        this.trayVisualInfo = trayVisualInfo
         this.robotViewPropertyInfo = robotViewPropertyInfo
         this.headViewPropertyInfo = headViewPropertyInfo
-        this.trayContainerViewPropertyInfo = trayContainerViewPropertyInfo
         this.duration = duration
         this.interpolatorType = interpolatorType
         this.isDelay = isDelay
