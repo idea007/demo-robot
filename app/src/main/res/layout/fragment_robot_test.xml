@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#8000ffff">
 
 
     <Space
@@ -16,7 +17,7 @@
         android:layout_width="80dp"
         android:layout_height="120dp"
         android:layout_gravity="center_horizontal"
-        android:background="#8000ffff" />
+         />
 
     <Space
         android:layout_width="match_parent"
@@ -91,11 +92,25 @@
                 android:textAppearance="?attr/textAppearanceTitleLarge" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_action_lefe_loke"
+                android:id="@+id/btn_action_left_look"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="左看看" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_action_right_look"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="右看看" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_action_left_move"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="左移" />
 
 
             <com.google.android.material.button.MaterialButton

@@ -39,8 +39,10 @@ open class CurveShape {
     var isLink = true
     var centerX = 0f
     var centerY = 0f
+
     //半径 做为一个基础值，所有的计算都基于这个值
     var radius = 0f
+
     //存储四段贝塞尔曲线
     val curveList = ArrayList<Curve>()
 
@@ -202,6 +204,7 @@ open class VisualInfo {
     var isDelay: Boolean = false
     var drawInfo = DrawInfo()
     var viewPropertyInfo = ViewPropertyInfo()
+
     constructor()
     constructor(drawInfo: DrawInfo, viewPropertyInfo: ViewPropertyInfo) {
         this.drawInfo = drawInfo
@@ -232,6 +235,7 @@ open class PoseInfo {
     var interpolatorType: Int = 8
     var isDelay: Boolean = false
     var emoteInfo: EmoteInfo = EmoteInfo()
+    var trayVisualInfo: VisualInfo = VisualInfo()
     var robotViewPropertyInfo: ViewPropertyInfo = ViewPropertyInfo()
     var headViewPropertyInfo: ViewPropertyInfo = ViewPropertyInfo()
 
@@ -248,10 +252,12 @@ open class PoseInfo {
         isDelay: Boolean = false,
         duration: Long = Constants.DEFAULT_DURATION, interpolatorType: Int = 8,
         emoteInfo: EmoteInfo,
+        trayVisualInfo: VisualInfo,
         robotViewPropertyInfo: ViewPropertyInfo = ViewPropertyInfo(),
         headViewPropertyInfo: ViewPropertyInfo = ViewPropertyInfo(),
     ) {
         this.emoteInfo = emoteInfo
+        this.trayVisualInfo = trayVisualInfo
         this.robotViewPropertyInfo = robotViewPropertyInfo
         this.headViewPropertyInfo = headViewPropertyInfo
         this.duration = duration

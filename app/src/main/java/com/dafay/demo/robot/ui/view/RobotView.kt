@@ -70,8 +70,7 @@ class RobotView @kotlin.jvm.JvmOverloads constructor(
     fun changePose(poseInfo: PoseInfo, isInvalidate: Boolean = true, progress: Float = 0f) {
         this.curProgress = progress
         binding.fvFace.changeEmote(poseInfo.emoteInfo, isInvalidate, progress)
-        // 是否改变颜色
-//        binding.cvTrayShape.changeVisualInfo(poseInfo.trayVisualInfo, isInvalidate, progress)
+        binding.cvTrayShape.changeVisualInfo(poseInfo.trayVisualInfo, isInvalidate, progress)
         endPoseInfo = poseInfo
         if (centerX == 0f) {
             return
@@ -85,6 +84,7 @@ class RobotView @kotlin.jvm.JvmOverloads constructor(
             poseInfo.headViewPropertyInfo,
             progress
         )
+        updateTrayViewByHeadViewProperty()
     }
 
     fun setProgress(progress: Float) {
@@ -109,6 +109,9 @@ class RobotView @kotlin.jvm.JvmOverloads constructor(
             val headViewPropertyInfo = binding.flHeadContainer.getCurrentViewPropertyInfo(centerX)
             scaleY = 1f + (headViewPropertyInfo.translationYRatio / 0.25f) * 0.08f
             scaleX = 1f + (headViewPropertyInfo.translationYRatio / 0.25f) * 0.08f
+            rotation = -headViewPropertyInfo.rotation/2
+            rotationX = headViewPropertyInfo.rotationX
+            rotationY = headViewPropertyInfo.rotationY
         }
     }
 
@@ -134,6 +137,7 @@ class RobotView @kotlin.jvm.JvmOverloads constructor(
                 }
                 posts.removeAt(0)
                 if (posts.isEmpty()) {
+                    isActionRun = false
                     callback?.onAnimationAllFinish()
                 } else {
                     execAction(posts, callback)
@@ -143,6 +147,7 @@ class RobotView @kotlin.jvm.JvmOverloads constructor(
         actionValueAnimator.addUpdateListener(listener)
         actionValueAnimator.addListener(listener)
         actionValueAnimator.start()
+        isActionRun = true
     }
 
     private fun cancelActionAnim() {
@@ -158,6 +163,7 @@ class RobotView @kotlin.jvm.JvmOverloads constructor(
         binding.fvFace.execAnim(emotes, emotesCallback)
     }
 
+    private var isActionRun = false
     fun luffingAnim() {
         val DEFALUT_SPEED = 1
         // 上下摆动的进度
@@ -166,10 +172,14 @@ class RobotView @kotlin.jvm.JvmOverloads constructor(
         luffingValueAnimator.setInterpolator(LinearInterpolator())
         luffingValueAnimator.setDuration(1000 * 60 * 60 * 24)
         luffingValueAnimator.addUpdateListener(ValueAnimator.AnimatorUpdateListener { animator ->
-            curLuffingProgress += DEFALUT_SPEED
-            binding.flHeadContainer.translationY = centerX * Math.sin(Math.toRadians((curLuffingProgress % 360).toDouble()))
-                .toFloat() / 4
-            updateTrayViewByHeadViewProperty()
+            if (!isActionRun) {
+                curLuffingProgress += DEFALUT_SPEED
+                binding.flHeadContainer.translationY = centerX * Math.sin(Math.toRadians((curLuffingProgress % 360).toDouble()))
+                    .toFloat() / 6
+                updateTrayViewByHeadViewProperty()
+            } else {
+                curLuffingProgress = 0
+            }
         })
         luffingValueAnimator.start()
     }
